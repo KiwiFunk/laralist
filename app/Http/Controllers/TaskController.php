@@ -49,6 +49,10 @@ class TaskController extends Controller
 
     // Delete a task 
     public function delete($id) {
-        return "This is the delete method, which deletes the task by ID: $id.";
+        $task = Task::findOrFail($id); // Find the task
+        $task->delete(); // Delete the task
+
+        return redirect('/tasks'); // Redirect back to the task list
     }
+
 }

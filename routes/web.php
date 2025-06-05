@@ -8,4 +8,4 @@ Route::get('/tasks/create', [TaskController::class, 'create']);     // Show task
 Route::get('/tasks/{id}/edit', [TaskController::class, 'edit']);    // Show task edit form
 Route::post('/tasks', [TaskController::class, 'store']);            // Handle new task submission
 Route::put('/tasks/{id}', [TaskController::class, 'update']);       // Update an existing task
-Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);   // Delete a task
+Route::delete('/tasks/{id}', [TaskController::class, 'delete']);   // Delete a task

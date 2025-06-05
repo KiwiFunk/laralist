@@ -17,10 +17,17 @@
                     ❌ Not Done
                 @endif
                 | <a href="/tasks/{{ $task->id }}/edit">Edit</a>
+
+                <form action="/tasks/{{ $task->id }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE') <!-- Tells Laravel this is a delete request -->
+                    <button type="submit">Delete</button>
+                </form>
             </li>
         @endforeach
     </ul>
 
     <a href="/tasks/create">Create New Task</a>
+
 </body>
 </html>
