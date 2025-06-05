@@ -18,6 +18,12 @@ class TaskController extends Controller
         return view('tasks.create');    // Return the view for creating a new task
     }
 
+    // Show task edit form
+    public function edit($id) {
+        $task = Task::findOrFail($id);  // Find the task by ID or fail if not found
+        return view('tasks.edit', ['task' => $task]); // Pass the task data to the edit view
+    }
+
     // Store a new task 
     public function store(Request $request) {
         $task = Task::create([
