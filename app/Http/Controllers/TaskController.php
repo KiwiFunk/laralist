@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;        // Import the Task model
 
 class TaskController extends Controller
 {
