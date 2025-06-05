@@ -35,6 +35,18 @@ class TaskController extends Controller
         return redirect('/tasks'); // Redirect to tasks list
     }
 
+    // Update an existing task
+    public function update(Request $request, $id) {
+        $task = Task::findOrFail($id); // Find the task by ID or fail if not found
+        $task->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'completed' => $request->input('completed', false), // Default to false if not provided
+        ]);
+
+        return redirect('/tasks'); // Redirect to tasks list
+    }
+
     // Delete a task 
     public function delete($id) {
         return "This is the delete method, which deletes the task by ID: $id.";
