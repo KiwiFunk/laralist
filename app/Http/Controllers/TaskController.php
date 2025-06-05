@@ -19,7 +19,13 @@ class TaskController extends Controller
 
     // Store a new task 
     public function store(Request $request) {
-        return "This is the store method, which saves a new task.";
+        $task = Task::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'completed' => false,
+        ]);
+
+        return redirect('/tasks'); // Redirect to tasks list
     }
 
     // Delete a task 
