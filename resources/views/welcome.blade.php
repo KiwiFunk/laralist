@@ -103,7 +103,7 @@
                     </svg>
                 </div>
                 <h1 class="text-6xl md:text-7xl font-black tracking-tight mb-4">
-                    <span class="text-orange-500">Lara<span class="text-stone-100">list</span></span>
+                    <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">Lara<span class="text-zinc-100">list</span></span>
                     
                 </h1>
             </div>

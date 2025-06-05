@@ -2,32 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Task List</title>
+    <title>Your Tasks | LaraList</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-    <h1>All Tasks</h1>
+<body class="bg-zinc-900 text-gray-100 flex justify-center py-12">
+    <div class="max-w-4xl w-full px-6">
+        <h1 class="text-4xl font-bold text-orange-500 mb-6">Your Task List</h1>
 
-    <ul>
-        @foreach($tasks as $task)
-            <li>
-                <strong>{{ $task->title }}</strong>: {{ $task->description }}
-                @if($task->completed)
-                    ✅ Completed
-                @else
-                    ❌ Not Done
-                @endif
-                | <a href="/tasks/{{ $task->id }}/edit">Edit</a>
+        <!-- Task Cards -->
+        <div class="grid gap-6">
+            @foreach($tasks as $task)
+                <div class="bg-zinc-800 border border-zinc-700 rounded-lg p-6 shadow-md hover:shadow-orange-500/20 transition">
+                    <h2 class="text-2xl font-semibold text-orange-400">{{ $task->title }}</h2>
+                    <p class="text-gray-400 mt-2">{{ $task->description }}</p>
 
-                <form action="/tasks/{{ $task->id }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE') <!-- Tells Laravel this is a delete request -->
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        @endforeach
-    </ul>
+                    <!-- Task Footer -->
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="text-sm px-3 py-1 rounded-md font-medium {{ $task->completed ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}">
+                            {{ $task->completed ? 'Completed' : 'Pending' }}
+                        </span>
 
-    <a href="/tasks/create">Create New Task</a>
-
+                        <div class="flex space-x-3">
+                            <a href="/tasks/{{ $task->id }}/edit" class="text-orange-400 hover:text-orange-500 transition">Edit</a>
+                            <form action="/tasks/{{ $task->id }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 hover:text-red-600 transition">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </body>
 </html>
