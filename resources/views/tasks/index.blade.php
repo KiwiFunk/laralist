@@ -10,12 +10,13 @@
     <ul>
         @foreach($tasks as $task)
             <li>
-                <strong>{{ $task->title }}</strong>: {{ $task->description }} 
+                <strong>{{ $task->title }}</strong>: {{ $task->description }}
                 @if($task->completed)
                     ✅ Completed
                 @else
                     ❌ Not Done
                 @endif
+                | <a href="/tasks/{{ $task->id }}/edit">Edit</a>
             </li>
         @endforeach
     </ul>
