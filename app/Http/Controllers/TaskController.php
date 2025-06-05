@@ -8,7 +8,8 @@ class TaskController extends Controller
 {
     // Fetch all tasks
     public function index() {
-        return "This is the index method, which retrieves all tasks.";
+        $tasks = Task::all(); // Task inherits from Model, so we can use Eloquent methods
+        return response()->json($tasks); // Return tasks as JSON response
     }
 
     // Show task creation form
