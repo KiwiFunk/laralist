@@ -3,6 +3,9 @@
 use App\Http\Controllers\TaskController;
 
 // API Endpoints for Task Management
+Route::get('/', function () {
+    return view('welcome'); // Show the welcome page
+});
 Route::get('/tasks', [TaskController::class, 'index']);             // Show all tasks
 Route::get('/tasks/create', [TaskController::class, 'create']);     // Show task creation form
 Route::get('/tasks/{id}/edit', [TaskController::class, 'edit']);    // Show task edit form
