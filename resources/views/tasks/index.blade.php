@@ -5,16 +5,16 @@
     <title>Your Tasks | LaraList</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-zinc-900 text-gray-100 flex justify-center py-12">
+<body class="bg-zinc-900 text-zinc-100 flex justify-center py-12">
     <div class="max-w-4xl w-full px-6">
         <h1 class="text-4xl font-bold text-orange-500 mb-6">Your Task List</h1>
 
         <!-- Task Cards -->
         <div class="grid gap-6">
             @foreach($tasks as $task)
-                <div class="bg-zinc-800 border border-zinc-700 rounded-lg p-6 shadow-md hover:shadow-orange-500/20 transition">
+                <div class="px-6 py-4 bg-zinc-800 text-zinc-100 font-semibold rounded-xl border-2 border-zinc-700 hover:border-orange-500 transition-all duration-300 transform hover:scale-101 hover:bg-gray-750">
                     <h2 class="text-2xl font-semibold text-orange-400">{{ $task->title }}</h2>
-                    <p class="text-gray-400 mt-2">{{ $task->description }}</p>
+                    <p class="text-zinc-400 text-sm mt-2 font-normal">{{ $task->description }}</p>
 
                     <!-- Task Footer -->
                     <div class="mt-4 flex items-center justify-between">
