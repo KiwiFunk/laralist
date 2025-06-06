@@ -85,9 +85,48 @@
         @if($tasks->count() > 0)
             <div class="grid gap-6">
                 @foreach($tasks as $index => $task)
-                    <div x-data="{isEditing: false}" class="group relative bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-500 transform hover:scale-[1.01] hover:shadow-2xl hover:shadow-orange-500/10"
-                         style="animation: slideInUp 0.6s ease-out {{ $index * 0.1 }}s both;">
-                        
+                    <div 
+                        x-data="{
+                            isEditing: false,
+                            loading: false,
+
+                            async updateTask() {
+                                this.loading = true;
+                                try {
+                                    // Get the form element using Alpine root property
+                                    const form = $el.querySelector('form');
+                                    const formData = new FormData(form);
+
+                                    // Send an AJAX request to update the task
+                                    const response = await fetch(form.action, {
+                                        method: 'POST',
+                                        body: formData,
+                                        headers: {
+                                            'X-Requested-With': 'XMLHttpRequest',       // Tell Laravel this is an AJAX request
+                                            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+                                        }
+                                    });
+
+                                    const data = await response.json();         // Parse the JSON response
+                                    if (data.success) {
+                                        // Success! Update the display
+                                        this.isEditing = false;
+                                        // UI UPDATE LOGIC HERE
+                                        console.log('Task updated successfully:', data.task);
+                                    } else {
+                                        alert('Oops! Something went wrong while updating the task.');
+                                    }
+                                } catch (error) {
+                                    console.error('Error updating task:', error);
+                                    alert('An error occurred while updating the task. Please try again.');
+                                } finally {
+                                    this.loading = false;
+                                }
+                            }
+                        }" 
+                        class="group relative bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-500 transform hover:scale-[1.01] hover:shadow-2xl hover:shadow-orange-500/10"
+                        style="animation: slideInUp 0.6s ease-out {{ $index * 0.1 }}s both;"
+                    >
                         <!-- Task Status Indicator -->
                         <div class="absolute -left-2 top-6 w-4 h-4 rounded-full {{ $task->completed ? 'bg-green-500' : 'bg-orange-500' }} shadow-lg"></div>
                         
