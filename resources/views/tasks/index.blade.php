@@ -39,7 +39,7 @@
         </div>
 
         <!-- Create Task Bar -->
-        <div class="py-4 bg-zinc-500">
+        <div class="py-4 bg-zinc-500 mb-8">
             <form action="/tasks" method="POST">
                 @csrf <!-- Protects against cross-site request forgery -->
                 
@@ -49,18 +49,13 @@
                 <label class="sr-only" for="description">Description:</label>
                 <textarea name="description" id="description" placeholder="Description" rows="1"></textarea>
                 
-                <button type="submit">Add Task</button>
+                <button type="submit" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 hover:cursor-pointer">
+                    <svg class="w-5 h-5 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                    </svg>
+                    Add New Task
+                </button>
             </form>
-        </div>
-
-        <!-- Add Task Button -->
-        <div class="text-center mb-8">
-            <a href="/tasks/create" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105">
-                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
-                </svg>
-                Add New Task
-            </a>
         </div>
 
         <!-- Task Cards -->
