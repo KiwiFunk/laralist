@@ -99,6 +99,7 @@
                                     const form = this.$refs.editForm;
                                     const formData = new FormData(form);
 
+                                    // Log the form data for debugging
                                     console.log([...formData.entries()]);
 
                                     // Send an AJAX request to update the task
@@ -116,7 +117,16 @@
                                     if (data.success) {
                                         // Success! Update the display
                                         this.isEditing = false;
-                                        // UI UPDATE LOGIC HERE
+
+                                        // Update data in DOM using response to avoid full page reload
+                                        const titleEl = this.$refs.taskTitle;
+                                        const descriptionEl = this.$refs.taskDescription
+                                        
+                                        // Update title
+                                        titleEl.textContent = data.task.title;
+                            
+
+                                        
                                         console.log('Task updated successfully:', data.task);
                                     } else {
                                         alert('Oops! Something went wrong while updating the task.');
@@ -140,7 +150,7 @@
                         <div x-show="!isEditing" class="flex items-start justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center gap-3 mb-3">
-                                    <h2 class="text-2xl font-bold text-zinc-100 group-hover:text-orange-400 transition-colors {{ $task->completed ? 'line-through opacity-75' : '' }}">
+                                    <h2 x-ref="taskTitle" class="text-2xl font-bold text-zinc-100 group-hover:text-orange-400 transition-colors {{ $task->completed ? 'line-through opacity-75' : '' }}">
                                         {{ $task->title }}
                                     </h2>
                                     <!-- Checkmark Icon -->
@@ -152,7 +162,7 @@
                                 </div>
                                 
                                 @if($task->description)
-                                    <p class="text-zinc-400 mb-4 leading-relaxed {{ $task->completed ? 'line-through opacity-75' : '' }}">
+                                    <p x-ref="taskDescription" class="text-zinc-400 mb-4 leading-relaxed {{ $task->completed ? 'line-through opacity-75' : '' }}">
                                         {{ $task->description }}
                                     </p>
                                 @endif
