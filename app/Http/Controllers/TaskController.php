@@ -50,8 +50,8 @@ class TaskController extends Controller
     }
 
     // Toggle task completion status
-    public function toggleStatus($id) {
-        $task = Task::findOrFail($id); // Find the task by ID or fail if not found
+    public function toggleStatus(Task $task) {
+        // Using route model binding, the $task parameter will automatically be resolved to the Task model instance
         $task->completed = !$task->completed; // Toggle the completed status
         $task->save(); // Save the updated task
         return redirect('/tasks'); // Redirect to tasks list
