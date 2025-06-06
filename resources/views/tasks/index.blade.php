@@ -38,6 +38,21 @@
             </div>
         </div>
 
+        <!-- Create Task Bar -->
+        <div class="py-4 bg-zinc-500">
+            <form action="/tasks" method="POST">
+                @csrf <!-- Protects against cross-site request forgery -->
+                
+                <label class="sr-only" for="title">Title:</label>
+                <input type="text" name="title" id="title" placeholder="Title" required>
+                
+                <label class="sr-only" for="description">Description:</label>
+                <textarea name="description" id="description" placeholder="Description" rows="1"></textarea>
+                
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+
         <!-- Add Task Button -->
         <div class="text-center mb-8">
             <a href="/tasks/create" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105">
