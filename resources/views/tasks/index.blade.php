@@ -124,6 +124,9 @@
                                         
                                         // Update title
                                         titleEl.textContent = data.task.title;
+
+                                        // Update description
+                                        descriptionEl.textContent = data.task.description;
                             
 
                                         
@@ -150,6 +153,7 @@
                         <div x-show="!isEditing" class="flex items-start justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center gap-3 mb-3">
+                                    <!-- Task Title -->
                                     <h2 x-ref="taskTitle" class="text-2xl font-bold text-zinc-100 group-hover:text-orange-400 transition-colors {{ $task->completed ? 'line-through opacity-75' : '' }}">
                                         {{ $task->title }}
                                     </h2>
@@ -161,11 +165,11 @@
                                     @endif
                                 </div>
                                 
-                                @if($task->description)
-                                    <p x-ref="taskDescription" class="text-zinc-400 mb-4 leading-relaxed {{ $task->completed ? 'line-through opacity-75' : '' }}">
-                                        {{ $task->description }}
-                                    </p>
-                                @endif
+                                <!-- Task Description -->
+                                <p x-ref="taskDescription" class="text-zinc-400 mb-4 leading-relaxed {{ $task->completed ? 'line-through opacity-75' : '' }}">
+                                    {{ $task->description ? $task->description : '' }}
+                                </p>
+                               
 
                                 <!-- Task Meta -->
                                 <div class="flex items-center gap-4 text-sm text-zinc-500">
