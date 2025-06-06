@@ -13,11 +13,6 @@ class TaskController extends Controller
         return view('tasks.index', ['tasks' => $tasks]); // Pass the data into the view
     }
 
-    // Show task creation form
-    public function create() {
-        return view('tasks.create');    // Return the view for creating a new task
-    }
-
     // Show task edit form
     public function edit($id) {
         $task = Task::findOrFail($id);  // Find the task by ID or fail if not found
