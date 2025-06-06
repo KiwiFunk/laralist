@@ -91,8 +91,8 @@
                         <!-- Task Status Indicator -->
                         <div class="absolute -left-2 top-6 w-4 h-4 rounded-full {{ $task->completed ? 'bg-green-500' : 'bg-orange-500' }} shadow-lg"></div>
                         
-                        <!-- Task Content -->
-                        <div class="flex items-start justify-between">
+                        <!-- Task Display Mode -->
+                        <div x-show="!isEditing" class="flex items-start justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center gap-3 mb-3">
                                     <h2 class="text-2xl font-bold text-zinc-100 group-hover:text-orange-400 transition-colors {{ $task->completed ? 'line-through opacity-75' : '' }}">
@@ -125,10 +125,10 @@
 
                             <!-- Action Buttons -->
                             <div class="flex items-center gap-3 ml-6">
-                                
+
                                 <!-- Edit Task -->
                                 <button 
-                                    onClick="isEditing = !isEditing" 
+                                    @click="isEditing = !isEditing" 
                                     class="group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300"
                                 >
                                     <svg class="w-5 h-5 text-zinc-400 group-hover/btn:text-orange-400 transition-colors" fill="currentColor" viewBox="0 0 20 20">
@@ -159,7 +159,12 @@
                                 </form>
                             </div>
                         </div>
-                        
+
+                        <!-- Task Edit Mode -->
+                        <div x-show="isEditing" class="flex items-start justify-between">
+
+                        </div>
+
                     </div>
                 @endforeach
             </div>
