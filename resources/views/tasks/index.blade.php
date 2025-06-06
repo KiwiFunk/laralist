@@ -85,7 +85,7 @@
         @if($tasks->count() > 0)
             <div class="grid gap-6">
                 @foreach($tasks as $index => $task)
-                    <div class="group relative bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-500 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/10"
+                    <div class="group relative bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-500 transform hover:scale-[1.01] hover:shadow-2xl hover:shadow-orange-500/10"
                          style="animation: slideInUp 0.6s ease-out {{ $index * 0.1 }}s both;">
                         
                         <!-- Task Status Indicator -->
@@ -120,14 +120,6 @@
                                         </svg>
                                         {{ $task->created_at->format('M j, Y') }}
                                     </span>
-                                    @if($task->due_date)
-                                        <span class="flex items-center gap-1">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                                            </svg>
-                                            Due {{ \Carbon\Carbon::parse($task->due_date)->format('M j') }}
-                                        </span>
-                                    @endif
                                 </div>
                             </div>
 
