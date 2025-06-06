@@ -209,6 +209,8 @@
                                         <label class="flex items-center gap-3 px-4 py-3 bg-zinc-700/30 border border-zinc-600 rounded-xl cursor-pointer hover:bg-zinc-700/50 transition-colors">
                                             <input type="checkbox" 
                                                    name="completed" 
+                                                   value="completed" 
+                                                   {{ $task->completed ? 'checked' : '' }}
                                                    class="w-4 h-4 text-orange-600 bg-zinc-700 border-zinc-600 rounded focus:ring-orange-500">
                                             <span class="text-sm text-zinc-300">Mark as completed</span>
                                         </label>
