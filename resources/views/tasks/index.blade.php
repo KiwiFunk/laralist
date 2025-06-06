@@ -161,16 +161,24 @@
                         </div>
 
                         <!-- Task Edit Mode -->
-                        <div x-show="isEditing" class="flex items-start justify-between">
+                        <div x-show="isEditing" class="flex flex-col gap-4">
 
-
-                            <!-- Action Buttons (EDIT) -->
-                            <div class="flex items-center gap-3 ml-6">
-
+                            <div class="flex flex-row gap-4">
+                                <!-- Title Edit -->
+                                <div class="grow">
+                                    <label class="sr-only" for="title-edit">Edit Title:</label>
+                                    <input type="text" 
+                                        name="title-edit" 
+                                        id="title-edit" 
+                                        placeholder="Edit the task title" 
+                                        class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500" 
+                                        required>
+                                </div>
+                                    
                                 <!-- Save Changes -->
                                 <button 
                                     @click="isEditing = !isEditing" 
-                                    class="group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300"
+                                    class="aspect-square flex items-center justify-center group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300"
                                 >
                                     <svg class="w-5 h-5 text-zinc-400 group-hover/btn:text-orange-400 transition-colors" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
@@ -180,18 +188,28 @@
                                 <!-- Cancel Changes -->
                                 <button 
                                     @click="isEditing = !isEditing" 
-                                    class="group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300"
+                                    class="aspect-square flex items-center justify-center group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300"
                                 >
                                     <svg class="w-5 h-5 text-zinc-400 group-hover/btn:text-orange-400 transition-colors" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
                                     </svg>
                                 </button>
 
-                                
+                            </div>
+
+                            <!-- Description Edit -->
+                            <div class="grow">
+                                <label class="sr-only" for="edit-description">Edit Description:</label>
+                                <textarea 
+                                    name="edit-description" 
+                                    id="edit-description" 
+                                    placeholder="Edit Task Description" 
+                                    rows="1" 
+                                    class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                ></textarea>
                             </div>
 
                         </div>
-
                     </div>
                 @endforeach
             </div>
