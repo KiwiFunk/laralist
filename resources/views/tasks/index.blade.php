@@ -22,6 +22,22 @@
             <p class="text-zinc-400 text-lg">Stay organized, stay productive</p>
         </div>
 
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-zinc-200 mb-1">{{ $tasks->count() }}</div>
+                <div class="text-zinc-400 text-sm">Total Tasks</div>
+            </div>
+            <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-green-400 mb-1">{{ $tasks->where('completed', true)->count() }}</div>
+                <div class="text-zinc-400 text-sm">Completed</div>
+            </div>
+            <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-red-400 mb-1">{{ $tasks->where('completed', false)->count() }}</div>
+                <div class="text-zinc-400 text-sm">Pending</div>
+            </div>
+        </div>
+
         <!-- Add Task Button -->
         <div class="text-center mb-8">
             <a href="/tasks/create" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105">
