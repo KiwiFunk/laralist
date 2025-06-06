@@ -6,27 +6,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-zinc-900 text-zinc-100 min-h-screen relative overflow-x-hidden">
-    <!-- Subtle animated background -->
-    <div class="fixed inset-0 z-0 opacity-30">
-        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="taskGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#f97316;stop-opacity:0.05" />
-                    <stop offset="50%" style="stop-color:#ea580c;stop-opacity:0.1" />
-                    <stop offset="100%" style="stop-color:#f97316;stop-opacity:0.05" />
-                </linearGradient>
-            </defs>
-            <path stroke="url(#taskGradient)" stroke-width="1" fill="none">
-                <animate attributeName="d" 
-                    values="M0,200 Q500,150 1000,200;
-                            M0,220 Q500,170 1000,220;
-                            M0,180 Q500,130 1000,180;
-                            M0,200 Q500,150 1000,200" 
-                    dur="20s" repeatCount="indefinite"/>
-            </path>
-        </svg>
-    </div>
-
+ 
     <div class="relative z-10 max-w-6xl mx-auto px-6 py-12">
 
         <!-- Add Task Button -->
