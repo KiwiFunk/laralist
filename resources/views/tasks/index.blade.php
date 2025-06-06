@@ -92,6 +92,14 @@
                             isEditing: false,
                             loading: false,
 
+                            // Alpine Reactive Data (like React useState)
+                            task: {
+                                id: {{ $task->id }},
+                                title: '{{ addslashes($task->title) }}',                // addslashes (PHP) prevents js syntax issues such as quotes in title by escaping them
+                                description: '{{ addslashes($task->description) }}',
+                                completed: {{ $task->completed ? 'true' : 'false' }},
+                            },
+
                             async updateTask() {
                                 this.loading = true;
                                 try {
@@ -115,26 +123,13 @@
                                     const data = await response.json();         // Parse the JSON response
 
                                     if (data.success) {
-                                        // Success! Update the display
+                                        // Success! Update reactive task data
                                         this.isEditing = false;
-
-                                        // Update data in DOM using response to avoid full page reload
-                                        const titleEl = this.$refs.taskTitle;
-                                        const descriptionEl = this.$refs.taskDescription
-                                        
-                                        // Update title
-                                        titleEl.textContent = data.task.title;
-
-                                        // Update description
-                                        descriptionEl.textContent = data.task.description;
-                            
-
-                                        
+                                        this.task = data.task; 
                                         console.log('Task updated successfully:', data.task);
                                     } else {
                                         alert('Oops! Something went wrong while updating the task.');
                                     }
-
                                 } catch (error) {
                                     console.error('Error updating task:', error);
                                     alert('An error occurred while updating the task. Please try again.');
@@ -147,27 +142,31 @@
                         style="animation: slideInUp 0.6s ease-out {{ $index * 0.1 }}s both;"
                     >
                         <!-- Task Status Indicator -->
-                        <div class="absolute -left-2 top-6 w-4 h-4 rounded-full {{ $task->completed ? 'bg-green-500' : 'bg-orange-500' }} shadow-lg"></div>
+                        <div class="absolute -left-2 top-6 w-4 h-4 rounded-full shadow-lg"
+                            :class="task.completed ? 'bg-green-500' : 'bg-orange-500'">
+                        </div>
                         
                         <!-- Task Display Mode -->
                         <div x-show="!isEditing" class="flex items-start justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center gap-3 mb-3">
                                     <!-- Task Title -->
-                                    <h2 x-ref="taskTitle" class="text-2xl font-bold text-zinc-100 group-hover:text-orange-400 transition-colors {{ $task->completed ? 'line-through opacity-75' : '' }}">
-                                        {{ $task->title }}
+                                    <h2 x-text="task.title" 
+                                        class="text-2xl font-bold"
+                                        :class="task.completed ? 'line-through opacity-75' : ''">
                                     </h2>
                                     <!-- Checkmark Icon -->
-                                    @if($task->completed)
-                                        <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                        </svg>
-                                    @endif
+                                    <svg x-show="task.completed" 
+                                        class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
                                 </div>
                                 
                                 <!-- Task Description -->
-                                <p x-ref="taskDescription" class="text-zinc-400 mb-4 leading-relaxed {{ $task->completed ? 'line-through opacity-75' : '' }}">
-                                    {{ $task->description ? $task->description : '' }}
+                                <p x-show="task.description" 
+                                    x-text="task.description"
+                                    class="text-zinc-400 mb-4 leading-relaxed"
+                                    :class="task.completed ? 'line-through opacity-75' : ''">
                                 </p>
                                
 
