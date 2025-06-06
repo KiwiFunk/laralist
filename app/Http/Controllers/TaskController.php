@@ -25,10 +25,9 @@ class TaskController extends Controller
     }
 
     // Update an existing task
-    public function update(Request $request, $id) {
+    public function update(Request $request, Task $task) {
 
-        // Find the target task by ID or fail if not found
-        $task = Task::findOrFail($id); 
+        // Using route model binding, the $task parameter will automatically be resolved to the Task model instance
 
         // Update the task with request data
         $task->update([
