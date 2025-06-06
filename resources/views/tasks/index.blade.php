@@ -162,7 +162,7 @@
 
                         <!-- Task Edit Mode -->
                         <div x-show="isEditing">
-                            <form action="/tasks/{{ $task->id }}" method="POST" class="space-y-4">
+                            <form @submit.prevent="updateTask()" action="/tasks/{{ $task->id }}" method="POST" class="space-y-4">
                                 @csrf
                                 @method('PUT')
                                 
