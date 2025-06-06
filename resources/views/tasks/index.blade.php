@@ -16,7 +16,7 @@
                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
             </div>
-            <h1 class="text-5xl font-black bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent mb-2">
+            <h1 class="text-5xl font-black bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent mb-2">
                 Your Tasks
             </h1>
             <p class="text-zinc-400 text-lg">Stay organized, stay productive</p>
@@ -50,7 +50,7 @@
                                name="title" 
                                id="title" 
                                placeholder="What needs to be done?" 
-                               class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200" 
+                               class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500" 
                                required>
                     </div>
                     
@@ -61,7 +61,7 @@
                             id="description" 
                             placeholder="Add more details (optional)" 
                             rows="1" 
-                            class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 resize-none"
+                            class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
                         ></textarea>
                     </div>
                 
