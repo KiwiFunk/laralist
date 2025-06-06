@@ -47,6 +47,13 @@ class TaskController extends Controller
         return redirect('/tasks'); // Redirect to tasks list
     }
 
+    // Toggle task completion status
+    public function toggleStatus($id) {
+        $task = Task::findOrFail($id); // Find the task by ID or fail if not found
+        $task->completed = !$task->completed; // Toggle the completed status
+        $task->save(); // Save the updated task
+    }
+
     // Delete a task 
     public function delete($id) {
         $task = Task::findOrFail($id); // Find the task
