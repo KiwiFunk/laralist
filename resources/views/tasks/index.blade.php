@@ -194,12 +194,13 @@
 
                                 <!-- Description Input -->
                                 <div>
-                                    <label for="edit-description" class="block text-sm font-medium text-zinc-300 mb-2">Description</label>
+                                    <label for="edit-description-{{ $task->id }}" class="block text-sm font-medium text-zinc-300 mb-2">Description</label>
                                     <textarea 
                                         name="description" 
+                                        id="edit-description-{{ $task->id }}"
                                         rows="3"
                                         class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 transition-all duration-200 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                    ></textarea>
+                                    >{{ $task->description }}</textarea>
                                 </div>
 
                                 <!-- This Row will eventually contain other fields such as Due Date, Priority etc -->
