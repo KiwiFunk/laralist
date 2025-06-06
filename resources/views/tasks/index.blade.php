@@ -162,9 +162,9 @@
 
                         <!-- Task Edit Mode -->
                         <div x-show="isEditing">
-                            <form action="#" method="#" class="space-y-4">
+                            <form action="/tasks/{{ $task->id }}" method="POST" class="space-y-4">
                                 @csrf
-                                @method('PATCH')
+                                @method('PUT')
                                 
                                 <!-- Edit Header -->
                                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-700/50">
@@ -181,10 +181,12 @@
 
                                 <!-- Title Input -->
                                 <div>
-                                    <label for="edit-title" class="block text-sm font-medium text-zinc-300 mb-2">Title</label>
+                                    <label for="edit-title-{{ $task->id }}" class="block text-sm font-medium text-zinc-300 mb-2">Title</label>
                                     <input 
                                         type="text" 
-                                        name="edit-title" 
+                                        name="title"
+                                        id="edit-title-{{ $task->id }}" 
+                                        value="{{ $task->title }}"
                                         class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500" 
                                         required
                                     >
@@ -194,7 +196,7 @@
                                 <div>
                                     <label for="edit-description" class="block text-sm font-medium text-zinc-300 mb-2">Description</label>
                                     <textarea 
-                                        name="edit-description" 
+                                        name="description" 
                                         rows="3"
                                         class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 transition-all duration-200 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
                                     ></textarea>
