@@ -163,6 +163,33 @@
                         <!-- Task Edit Mode -->
                         <div x-show="isEditing" class="flex items-start justify-between">
 
+
+                            <!-- Action Buttons (EDIT) -->
+                            <div class="flex items-center gap-3 ml-6">
+
+                                <!-- Save Changes -->
+                                <button 
+                                    @click="isEditing = !isEditing" 
+                                    class="group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300"
+                                >
+                                    <svg class="w-5 h-5 text-zinc-400 group-hover/btn:text-orange-400 transition-colors" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                    </svg>
+                                </button>
+
+                                <!-- Cancel Changes -->
+                                <button 
+                                    @click="isEditing = !isEditing" 
+                                    class="group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300"
+                                >
+                                    <svg class="w-5 h-5 text-zinc-400 group-hover/btn:text-orange-400 transition-colors" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                                    </svg>
+                                </button>
+
+                                
+                            </div>
+
                         </div>
 
                     </div>
