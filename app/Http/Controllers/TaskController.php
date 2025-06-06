@@ -26,14 +26,28 @@ class TaskController extends Controller
 
     // Update an existing task
     public function update(Request $request, $id) {
-        $task = Task::findOrFail($id); // Find the task by ID or fail if not found
+
+        // Find the target task by ID or fail if not found
+        $task = Task::findOrFail($id); 
+
+        // Update the task with request data
         $task->update([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'completed' => $request->input('completed', false), // Default to false if not provided
         ]);
 
-        return redirect('/tasks'); // Redirect to tasks list
+        // If it's an AJAX request, return JSON
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'task' => $task->fresh(), // Get updated task data
+                'message' => 'Task updated successfully!'
+            ]);
+        }
+
+        // Otherwise, redirect to tasks list to reflect changes
+        return redirect('/tasks'); 
     }
 
     // Toggle task completion status
