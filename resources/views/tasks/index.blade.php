@@ -161,55 +161,71 @@
                         </div>
 
                         <!-- Task Edit Mode -->
-                        <div x-show="isEditing" class="flex flex-col gap-4">
+                        <div x-show="isEditing">
+                            <form action="#" method="#" class="space-y-4">
+                                @csrf
+                                @method('PATCH')
+                                
+                                <!-- Edit Header -->
+                                <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-700/50">
 
-                            <div class="flex flex-row gap-4">
-                                <!-- Title Edit -->
-                                <div class="grow">
-                                    <label class="sr-only" for="title-edit">Edit Title:</label>
-                                    <input type="text" 
-                                        name="title-edit" 
-                                        id="title-edit" 
-                                        placeholder="Edit the task title" 
-                                        class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500" 
-                                        required>
+                                    <span class="font-medium text-orange-400">Editing Task</span>
+                            
+                                    <button type="button" @click="isEditing = !isEditing" 
+                                            class="text-zinc-400 hover:text-zinc-300 p-1">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
                                 </div>
-                                    
-                                <!-- Save Changes -->
-                                <button 
-                                    @click="isEditing = !isEditing" 
-                                    class="aspect-square flex items-center justify-center group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300"
-                                >
-                                    <svg class="w-5 h-5 text-zinc-400 group-hover/btn:text-orange-400 transition-colors" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
-                                    </svg>
-                                </button>
 
-                                <!-- Cancel Changes -->
-                                <button 
-                                    @click="isEditing = !isEditing" 
-                                    class="aspect-square flex items-center justify-center group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300"
-                                >
-                                    <svg class="w-5 h-5 text-zinc-400 group-hover/btn:text-orange-400 transition-colors" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
-                                    </svg>
-                                </button>
+                                <!-- Title Input -->
+                                <div>
+                                    <label for="edit-title" class="block text-sm font-medium text-zinc-300 mb-2">Title</label>
+                                    <input 
+                                        type="text" 
+                                        name="edit-title" 
+                                        class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200" 
+                                        required
+                                    >
+                                </div>
 
-                            </div>
+                                <!-- Description Input -->
+                                <div>
+                                    <label for="edit-description" class="block text-sm font-medium text-zinc-300 mb-2">Description</label>
+                                    <textarea 
+                                        name="edit-description" 
+                                        rows="3"
+                                        class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200 resize-none"
+                                    ></textarea>
+                                </div>
 
-                            <!-- Description Edit -->
-                            <div class="grow">
-                                <label class="sr-only" for="edit-description">Edit Description:</label>
-                                <textarea 
-                                    name="edit-description" 
-                                    id="edit-description" 
-                                    placeholder="Edit Task Description" 
-                                    rows="1" 
-                                    class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                ></textarea>
-                            </div>
+                                <!-- This Row will eventually contain other fields such as Due Date, Priority etc -->
+                                <div class="gap-4"> 
+                                    <div class="flex items-end">
+                                        <label class="flex items-center gap-3 px-4 py-3 bg-zinc-700/30 border border-zinc-600 rounded-xl cursor-pointer hover:bg-zinc-700/50 transition-colors">
+                                            <input type="checkbox" 
+                                                   name="completed" 
+                                                   class="w-4 h-4 text-orange-600 bg-zinc-700 border-zinc-600 rounded focus:ring-orange-500">
+                                            <span class="text-sm text-zinc-300">Mark as completed</span>
+                                        </label>
+                                    </div>
+                                </div>
 
+                                <!-- Action Buttons -->
+                                <div class="flex justify-end gap-3 pt-2">
+                                    <button type="button" @click="isEditing = !isEditing" 
+                                            class="px-4 py-2 text-zinc-400 hover:text-zinc-300 transition-colors">
+                                        Cancel
+                                    </button>
+                                    <button type="submit" 
+                                            class="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </form>
                         </div>
+ 
                     </div>
                 @endforeach
             </div>
