@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Your Tasks | LaraList</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">   
 </head>
 <body class="bg-zinc-900 text-zinc-100 min-h-screen relative overflow-x-hidden">
  
