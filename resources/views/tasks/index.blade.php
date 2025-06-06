@@ -39,22 +39,45 @@
         </div>
 
         <!-- Create Task Bar -->
-        <div class="py-4 bg-zinc-500 mb-8">
-            <form action="/tasks" method="POST" class="flex gap-6 flex-col md:flex-row">
-                @csrf <!-- Protects against cross-site request forgery -->
+        <div class="bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 mb-8 shadow-xl">
+            <form action="/tasks" method="POST" class="space-y-4">
+                @csrf
+                <div class="flex gap-4 flex-col md:flex-row md:items-center">
+
+                    <div class="flex-1">
+                        <label class="sr-only" for="title">Title:</label>
+                        <input type="text" 
+                               name="title" 
+                               id="title" 
+                               placeholder="What needs to be done?" 
+                               class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200" 
+                               required>
+                    </div>
+                    
+                    <div class="flex-2">
+                        <label class="sr-only" for="description">Description:</label>
+                        <textarea 
+                            name="description" 
+                            id="description" 
+                            placeholder="Add more details (optional)" 
+                            rows="1" 
+                            class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 resize-none"
+                        ></textarea>
+                    </div>
                 
-                <label class="sr-only" for="title">Title:</label>
-                <input type="text" name="title" id="title" placeholder="Title" class="grow-2" required>
-                
-                <label class="sr-only" for="description">Description:</label>
-                <textarea name="description" id="description" placeholder="Description" rows="1" class="grow-8"></textarea>
-                
-                <button type="submit" class="grow-0 group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 hover:cursor-pointer">
-                    <svg class="w-5 h-5 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
-                    </svg>
-                    Add New Task
-                </button>
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        class="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-101 hover:from-orange-600 hover:to-orange-700 hover:cursor-pointer"
+                    >
+                        <svg class="w-4 h-4 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="hidden sm:inline">Add Task</span>
+                        <span class="sm:hidden">Add</span>
+                    </button>
+                    
+                </div>
             </form>
         </div>
 
