@@ -96,12 +96,14 @@
                                 this.loading = true;
                                 try {
                                     // Get the form element using Alpine root property
-                                    const form = $el.querySelector('form');
+                                    const form = this.$refs.editForm;
                                     const formData = new FormData(form);
+
+                                    console.log([...formData.entries()]);
 
                                     // Send an AJAX request to update the task
                                     const response = await fetch(form.action, {
-                                        method: 'PUT',
+                                        method: 'POST',
                                         body: formData,
                                         headers: {
                                             'X-Requested-With': 'XMLHttpRequest',       // Tell Laravel this is an AJAX request
@@ -205,7 +207,7 @@
 
                         <!-- Task Edit Mode -->
                         <div x-show="isEditing">
-                            <form action="/tasks/{{ $task->id }}" method="POST" class="space-y-4">
+                            <form @submit.prevent="updateTask()" action="/tasks/{{ $task->id }}" method="POST" class="space-y-4" x-ref="editForm">
                                 @csrf
                                 @method('PUT')
                                 
