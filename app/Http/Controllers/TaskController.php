@@ -52,6 +52,7 @@ class TaskController extends Controller
         $task = Task::findOrFail($id); // Find the task by ID or fail if not found
         $task->completed = !$task->completed; // Toggle the completed status
         $task->save(); // Save the updated task
+        return redirect('/tasks'); // Redirect to tasks list
     }
 
     // Delete a task 
