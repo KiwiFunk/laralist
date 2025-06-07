@@ -153,13 +153,11 @@
                         x-data="{
                             isEditing: false,
                             loading: false,
+                            taskId: {{ $task->id }},  // Store task ID for easy access
 
-                            // Alpine Reactive Data (like React useState)
-                            task: {
-                                id: {{ $task->id }},
-                                title: '{{ addslashes($task->title) }}',                // addslashes (PHP) prevents js syntax issues such as quotes in title by escaping them
-                                description: '{{ addslashes($task->description) }}',
-                                completed: {{ $task->completed ? 'true' : 'false' }},
+                            // Get data from Alpine store using taskId
+                            get task() {
+                                return this.$store.taskManager.tasks.find(t => t.id === this.taskId);
                             },
 
                             // Update the Task
@@ -188,9 +186,6 @@
                                     if (data.success) {
                                         // Success! Update reactive task data
                                         this.isEditing = false;
-                                        this.task = data.task; 
-
-                                        // Update the Alpine store with the new task state
                                         this.$store.taskManager.updateTask(data.task.id, data.task);
                                         
                                         console.log('Task updated successfully:', data.task);
@@ -221,8 +216,7 @@
                                     const data = await response.json();
 
                                     if (data.success) {
-                                        this.task.completed = !this.task.completed;         // Update the local task state
-                                        this.$store.taskManager.toggleTask(this.task.id);   // Update the Alpine store state
+                                        this.$store.taskManager.toggleTask(this.task.id);
                                         console.log(data.message);
                                     }
                                 } catch (error) {
@@ -250,7 +244,7 @@
 
                                     if (data.success) {
 
-                                        // Remove the task from the Alpine store
+                                        // Remove the task from the store
                                         this.$store.taskManager.deleteTask(this.task.id);
 
                                         // Pre delete animation
