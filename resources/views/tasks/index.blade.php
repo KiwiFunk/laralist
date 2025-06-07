@@ -271,15 +271,12 @@
                                 </button>
                                 
                                 <!-- Delete Task -->
-                                <form action="/tasks/{{ $task->id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this task?')" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-red-500/20 border border-zinc-600 hover:border-red-500/50 transition-all duration-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-400 group-hover/btn:text-red-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7L5 7M10 11V17M14 11V17M5 7L6 19C6 20.105 6.895 21 8 21H16C17.105 21 18 20.105 18 19L19 7M9 7V4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V7" />
-                                        </svg>
-                                    </button>
-                                </form>
+                                <button @click="deleteTask()" 
+                                    class="group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-red-500/20 border border-zinc-600 hover:border-red-500/50 transition-all duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-400 group-hover/btn:text-red-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7L5 7M10 11V17M14 11V17M5 7L6 19C6 20.105 6.895 21 8 21H16C17.105 21 18 20.105 18 19L19 7M9 7V4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V7" />
+                                    </svg>
+                                </button>
                             </div>
                         </div>
 
