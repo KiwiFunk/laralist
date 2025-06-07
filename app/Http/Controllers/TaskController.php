@@ -81,7 +81,15 @@ class TaskController extends Controller
         $task = Task::findOrFail($id); // Find the task
         $task->delete(); // Delete the task
 
-        return redirect('/tasks'); // Redirect back to the task list
+        // If AJAX, return JSON response
+        if (request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Task deleted successfully!'
+            ]);
+        }
+        // Otherwise, redirect to tasks list
+        return redirect('/tasks'); 
     }
 
 }
