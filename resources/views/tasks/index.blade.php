@@ -5,9 +5,12 @@
     <title>Your Tasks | LaraList</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">               // CSRF Token for AJAX requests
-    <meta name="tasks-data" content="{{ json_encode($tasks) }}">        // Store task data in a meta tag for easy access in JavaScript(store.js)
+    <!-- CSRF Token for AJAX requests -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Store task data in a meta tag for easy access in JavaScript (store.js) -->
+    <meta name="tasks-data" content="{{ json_encode($tasks) }}">
 </head>
+
 <body class="bg-zinc-900 text-zinc-100 min-h-screen relative overflow-x-hidden">
  
     <div class="relative z-10 max-w-6xl mx-auto px-6 py-12">
