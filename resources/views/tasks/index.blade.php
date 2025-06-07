@@ -100,6 +100,7 @@
                                 completed: {{ $task->completed ? 'true' : 'false' }},
                             },
 
+                            // Update the Task
                             async updateTask() {
                                 this.loading = true;
                                 try {
@@ -138,6 +139,7 @@
                                 }
                             },
 
+                            // Toggle Task Status
                             async toggleTaskStatus() {
                                 try {
                                     const response = await fetch(`/tasks/${this.task.id}/toggle`, {
@@ -157,6 +159,46 @@
                                     }
                                 } catch (error) {
                                     console.error('Error toggling task status:', error);
+                                }
+                            },
+
+                            // Delete Task
+                            async deleteTask() {
+
+                                if (!confirm('Are you sure you want to delete this task?')) {
+                                    return;
+                                }
+                                
+                                try {
+                                    const response = await fetch(`/tasks/${this.task.id}`, {
+                                        method: 'DELETE',
+                                        headers: {
+                                            'X-Requested-With': 'XMLHttpRequest',
+                                            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+                                        }
+                                    });
+
+                                    const data = await response.json();
+
+                                    if (data.success) {
+
+                                        // Pre delete animation
+                                        this.$el.style.transition = 'all 0.3s ease-out';
+                                        this.$el.style.transform = 'translateX(-100%)';
+                                        this.$el.style.opacity = '0';
+                                        
+                                        // Remove from DOM after animation (Match duration with CSS transition)
+                                        setTimeout(() => {
+                                            this.$el.remove();
+                                        }, 300);
+                                        
+                                        console.log('Task deleted successfully');
+                                    } else {
+                                        alert('Failed to delete task');
+                                    }
+                                } catch (error) {
+                                    console.error('Error deleting task:', error);
+                                    alert('Error deleting task');
                                 }
                             }
 
