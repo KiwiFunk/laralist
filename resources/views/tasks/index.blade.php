@@ -12,6 +12,9 @@
 </head>
 
 <body class="bg-zinc-900 text-zinc-100 min-h-screen relative overflow-x-hidden">
+
+    <!-- Animated Wave Background -->
+    @include('partials.waves-background')
  
     <div class="relative z-10 max-w-6xl mx-auto px-6 py-12">
 
