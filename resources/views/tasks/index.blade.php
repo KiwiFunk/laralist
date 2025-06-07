@@ -108,7 +108,7 @@
                                     const formData = new FormData(form);
 
                                     // Log the form data for debugging
-                                    console.log([...formData.entries()]);
+                                    console.log([...formData.entries()]);                                    
 
                                     // Send an AJAX request to update the task
                                     const response = await fetch(form.action, {
@@ -136,7 +136,30 @@
                                 } finally {
                                     this.loading = false;
                                 }
+                            },
+
+                            async toggleTaskStatus() {
+                                try {
+                                    const response = await fetch(`/tasks/${this.task.id}/toggle`, {
+                                        method: 'POST',  // ← Simple POST request
+                                        headers: {
+                                            'X-Requested-With': 'XMLHttpRequest',
+                                            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+                                        }
+
+                                    });
+
+                                    const data = await response.json();
+
+                                    if (data.success) {
+                                        this.task.completed = !this.task.completed;
+                                        console.log(data.message);
+                                    }
+                                } catch (error) {
+                                    console.error('Error toggling task status:', error);
+                                }
                             }
+
                         }" 
                         class="group relative bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-500 transform hover:scale-[1.01] hover:shadow-2xl hover:shadow-orange-500/10"
                         style="animation: slideInUp 0.6s ease-out {{ $index * 0.1 }}s both;"
@@ -195,15 +218,15 @@
                                 </button>
 
                                 <!-- Toggle Task Status -->
-                                <form action="/tasks/{{ $task->id }}" method="POST" class="inline">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="group/btn p-2 bg-zinc-700/50 rounded-lg border border-zinc-600 {{ $task->completed ? 'hover:bg-red-500/20 hover:border-red-500/50' : 'hover:bg-green-500/20 hover:border-green-500/50' }} transition-all duration-300">
-                                        <svg class="w-5 h-5 text-zinc-400 {{ $task->completed ? 'group-hover/btn:text-red-400' : 'group-hover/btn:text-green-500' }} transition-colors" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                        </svg>
-                                    </button>
-                                </form>
+                                <button @click="toggleTaskStatus()" 
+                                    class="group/btn p-2 bg-zinc-700/50 rounded-lg border border-zinc-600 transition-all duration-300"
+                                    :class="task.completed ? 'hover:bg-red-500/20 hover:border-red-500/50' : 'hover:bg-green-500/20 hover:border-green-500/50'"
+                                >
+                                    <svg class="w-5 h-5 text-zinc-400 transition-colors" fill="currentColor" viewBox="0 0 20 20"
+                                        :class="task.completed ? 'group-hover/btn:text-red-400' : 'group-hover/btn:text-green-500'">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
                                 
                                 <!-- Delete Task -->
                                 <form action="/tasks/{{ $task->id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this task?')" class="inline">

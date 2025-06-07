@@ -59,11 +59,10 @@ class TaskController extends Controller
         if (request()->ajax()) {
             return response()->json([
                 'success' => true,
-                'task' => $task->fresh(), // Get updated task data
                 'message' => 'Task status toggled successfully!'
             ]);
         }
-        
+
         // Otherwise, redirect to tasks list
         return redirect('/tasks');
     }
