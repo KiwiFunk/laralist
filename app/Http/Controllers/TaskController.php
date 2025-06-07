@@ -21,7 +21,16 @@ class TaskController extends Controller
             'completed' => false,
         ]);
 
-        return redirect('/tasks'); // Redirect to tasks list
+        // If AJAX, return JSON response
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'task' => $task, // Return the created task data
+                'message' => 'Task created successfully!'
+            ]);
+        }
+        // Otherwise, redirect to tasks list
+        return redirect('/tasks'); 
     }
 
     // Update an existing task
