@@ -41,8 +41,58 @@
         </div>
 
         <!-- Create Task Bar -->
-        <div class="bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 mb-8 shadow-xl">
-            <form action="/tasks" method="POST" class="space-y-4">
+        <div class="bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 mb-8 shadow-xl"
+            x-data="{
+                loading: false,
+                 
+                async createTask(event) {
+                    this.loading = true;
+                    try {
+                        // When intercepting, Alpine store the form data as an event target ($event)
+                        const form = event.target;
+                        const formData = new FormData(form);
+                         
+                        const response = await fetch('/tasks', {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+                            }
+                        });
+                         
+                        const data = await response.json();
+                         
+                        if (data.success) {
+                            // Update Alpine store with new task
+                            this.$store.taskManager.addTask(data.task);
+                             
+                            // Clear the form
+                            form.reset();
+                             
+                            // Add new task card to DOM
+                            this.addTaskToDOM(data.task);
+                             
+                            console.log('Task created successfully:', data.task);
+                        } else {
+                            alert('Failed to create task');
+                        }
+                    } catch (error) {
+                        console.error('Error creating task:', error);
+                        alert('Error creating task');
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+                 
+                addTaskToDOM(task) {
+                    // Using reload for now - improve later with dynamic DOM manipulation
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500);
+                }
+            }">
+            <form @submit.prevent="createTask($event)" action="/tasks" method="POST" class="space-y-4">
                 @csrf
                 <div class="flex gap-4 flex-col md:flex-row md:items-center">
 
@@ -67,16 +117,28 @@
                         ></textarea>
                     </div>
                 
-                    <!-- Submit Button -->
+                    <!-- Submit Button with Loading State -->
                     <button 
                         type="submit" 
-                        class="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-101 hover:from-orange-600 hover:to-orange-700 hover:cursor-pointer"
+                        :disabled="loading"
+                        class="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-101 hover:from-orange-600 hover:to-orange-700"
+                        :class="loading ? 'opacity-50 cursor-not-allowed' : ''"
                     >
-                        <svg class="w-4 h-4 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                        <!-- Loading spinner -->
+                        <svg x-show="loading" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        
+                        <!-- Plus icon -->
+                        <svg x-show="!loading" class="w-4 h-4 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
                         </svg>
-                        <span class="hidden sm:inline">Add Task</span>
-                        <span class="sm:hidden">Add</span>
+                        
+                        <span x-show="!loading" class="hidden sm:inline">Add Task</span>
+                        <span x-show="loading" class="hidden sm:inline">Creating...</span>
+                        <span x-show="!loading" class="sm:hidden">Add</span>
+                        <span x-show="loading" class="sm:hidden">...</span>
                     </button>
                     
                 </div>
