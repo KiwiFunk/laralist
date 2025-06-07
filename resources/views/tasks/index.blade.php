@@ -13,6 +13,9 @@
 
 <body class="bg-zinc-900 text-zinc-100 min-h-screen relative overflow-x-hidden">
 
+    <!-- Navigation Bar -->
+    <x-navbar />
+
     <!-- Animated Wave Background -->
     @include('partials.waves-background')
  
