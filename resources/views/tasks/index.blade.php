@@ -25,17 +25,17 @@
         </div>
 
         <!-- Stats Bar -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 text-center">
-                <div class="text-3xl font-bold text-zinc-200 mb-1">{{ $tasks->count() }}</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" x-data="{}">
+            <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold text-zinc-200 mb-1" x-text="$store.taskManager.stats.total"></div>
                 <div class="text-zinc-400 text-sm">Total Tasks</div>
             </div>
-            <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 text-center">
-                <div class="text-3xl font-bold text-green-400 mb-1">{{ $tasks->where('completed', true)->count() }}</div>
+            <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold text-green-400 mb-1" x-text="$store.taskManager.stats.completed"></div>
                 <div class="text-zinc-400 text-sm">Completed</div>
             </div>
-            <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 text-center">
-                <div class="text-3xl font-bold text-red-400 mb-1">{{ $tasks->where('completed', false)->count() }}</div>
+            <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold text-red-400 mb-1" x-text="$store.taskManager.stats.pending"></div>
                 <div class="text-zinc-400 text-sm">Pending</div>
             </div>
         </div>
@@ -127,7 +127,12 @@
                                         // Success! Update reactive task data
                                         this.isEditing = false;
                                         this.task = data.task; 
+
+                                        // Update the Alpine store with the new task state
+                                        this.$store.taskManager.updateTask(data.task.id, data.task);
+                                        
                                         console.log('Task updated successfully:', data.task);
+
                                     } else {
                                         alert('Oops! Something went wrong while updating the task.');
                                     }
@@ -154,7 +159,8 @@
                                     const data = await response.json();
 
                                     if (data.success) {
-                                        this.task.completed = !this.task.completed;
+                                        this.task.completed = !this.task.completed;         // Update the local task state
+                                        this.$store.taskManager.toggleTask(this.task.id);   // Update the Alpine store state
                                         console.log(data.message);
                                     }
                                 } catch (error) {
@@ -181,6 +187,9 @@
                                     const data = await response.json();
 
                                     if (data.success) {
+
+                                        // Remove the task from the Alpine store
+                                        this.$store.taskManager.deleteTask(this.task.id);
 
                                         // Pre delete animation
                                         this.$root.classList.add('deleting');
@@ -395,5 +404,47 @@
             }
         }
     </style>
+
+    <!-- Alpine Store (TODO: Move to a separate file) -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('taskManager', {
+                // Initialize with server data
+                tasks: @json($tasks),
+                
+                // Computed stats (automatically reactive)
+                get stats() {
+                    return {
+                        total: this.tasks.length,
+                        completed: this.tasks.filter(task => task.completed).length,
+                        pending: this.tasks.filter(task => !task.completed).length
+                    };
+                },
+                
+                // Actions to modify tasks
+                updateTask(taskId, updatedTask) {
+                    const index = this.tasks.findIndex(t => t.id === taskId);
+                    if (index !== -1) {
+                        this.tasks[index] = { ...this.tasks[index], ...updatedTask };
+                    }
+                },
+                
+                toggleTask(taskId) {
+                    const task = this.tasks.find(t => t.id === taskId);
+                    if (task) {
+                        task.completed = !task.completed;
+                    }
+                },
+                
+                deleteTask(taskId) {
+                    this.tasks = this.tasks.filter(t => t.id !== taskId);
+                },
+                
+                addTask(newTask) {
+                    this.tasks.push(newTask);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
