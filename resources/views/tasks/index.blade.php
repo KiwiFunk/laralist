@@ -183,13 +183,11 @@
                                     if (data.success) {
 
                                         // Pre delete animation
-                                        this.$el.style.transition = 'all 0.3s ease-out';
-                                        this.$el.style.transform = 'translateX(-100%)';
-                                        this.$el.style.opacity = '0';
+                                        this.$root.classList.add('deleting');
                                         
                                         // Remove from DOM after animation (Match duration with CSS transition)
                                         setTimeout(() => {
-                                            this.$el.remove();
+                                            this.$root.remove();
                                         }, 300);
                                         
                                         console.log('Task deleted successfully');
@@ -383,6 +381,17 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        .deleting {
+                animation: slideOut 0.3s ease-out forwards !important;
+            }
+            
+        @keyframes slideOut {
+            to {     
+                transform: translateX(100%);
+                opacity: 0;
             }
         }
     </style>
