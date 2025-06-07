@@ -54,7 +54,18 @@ class TaskController extends Controller
         // Using route model binding, the $task parameter will automatically be resolved to the Task model instance
         $task->completed = !$task->completed; // Toggle the completed status
         $task->save(); // Save the updated task
-        return redirect('/tasks'); // Redirect to tasks list
+
+        // If it's an AJAX request, return JSON
+        if (request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'task' => $task->fresh(), // Get updated task data
+                'message' => 'Task status toggled successfully!'
+            ]);
+        }
+        
+        // Otherwise, redirect to tasks list
+        return redirect('/tasks');
     }
 
     // Delete a task 
