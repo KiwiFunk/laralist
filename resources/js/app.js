@@ -12,7 +12,9 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('taskCard', taskCard);
     Alpine.data('createTaskForm', createTaskForm);
     
-    // Store will be initialized in the Blade template with server data
+    // Init Alpine store with data from meta tag
+    const tasksData = JSON.parse(document.querySelector('meta[name="tasks-data"]')?.content || '[]');
+    Alpine.store('taskManager', createTaskStore(tasksData));
 });
 
 window.Alpine = Alpine

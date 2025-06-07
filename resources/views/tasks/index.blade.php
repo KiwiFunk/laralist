@@ -5,7 +5,8 @@
     <title>Your Tasks | LaraList</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">   
+    <meta name="csrf-token" content="{{ csrf_token() }}">               // CSRF Token for AJAX requests
+    <meta name="tasks-data" content="{{ json_encode($tasks) }}">        // Store task data in a meta tag for easy access in JavaScript(store.js)
 </head>
 <body class="bg-zinc-900 text-zinc-100 min-h-screen relative overflow-x-hidden">
  
@@ -56,47 +57,5 @@
             }
         }
     </style>
-
-    <!-- Alpine Store (TODO: Move to a separate file) -->
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.store('taskManager', {
-                // Initialize with server data
-                tasks: @json($tasks),
-                
-                // Computed stats (automatically reactive)
-                get stats() {
-                    return {
-                        total: this.tasks.length,
-                        completed: this.tasks.filter(task => task.completed).length,
-                        pending: this.tasks.filter(task => !task.completed).length
-                    };
-                },
-                
-                // Actions to modify tasks
-                updateTask(taskId, updatedTask) {
-                    const index = this.tasks.findIndex(t => t.id === taskId);
-                    if (index !== -1) {
-                        this.tasks[index] = { ...this.tasks[index], ...updatedTask };
-                    }
-                },
-                
-                toggleTask(taskId) {
-                    const task = this.tasks.find(t => t.id === taskId);
-                    if (task) {
-                        task.completed = !task.completed;
-                    }
-                },
-                
-                deleteTask(taskId) {
-                    this.tasks = this.tasks.filter(t => t.id !== taskId);
-                },
-                
-                addTask(newTask) {
-                    this.tasks.push(newTask);
-                }
-            });
-        });
-    </script>
 </body>
 </html>
