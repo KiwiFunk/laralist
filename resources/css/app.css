@@ -9,3 +9,29 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* Custom CSS for Laravel Blade components */
+
+.deleting {
+        animation: slideOut 0.3s ease-out forwards !important;
+    }
+
+/* Animations */
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+            
+@keyframes slideOut {
+    to {     
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
