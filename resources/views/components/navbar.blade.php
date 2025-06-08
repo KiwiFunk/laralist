@@ -1,4 +1,4 @@
-<div class="z-100 mx-6 my-4 p-5 bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl shadow-xl flex items-center justify-between">
+<div class="z-100 mx-6 my-4 p-4 bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl shadow-xl flex items-center justify-between">
     
     <!-- Left: Logo and Title -->
     <div class="flex items-center gap-2">
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Right: Auth Buttons -->
-    <div class="flex gap-4">
+    <div class="flex gap-3">
         <div class="px-5 py-2 flex items-center justify-center bg-zinc-800 text-zinc-100 font-semibold rounded-xl border-2 border-zinc-700 hover:border-orange-500 transition-all duration-300 hover:cursor-pointer">
             Register
         </div>
