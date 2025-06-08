@@ -1,5 +1,5 @@
 <!-- Animated Wave Background -->
-<div class="fixed inset-0 z-0">
+<div class="fixed inset-0 -z-10">
     <!-- Set SVG container to cover the entire viewport -->
     <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="none">
         <!-- Define SVG graphics to be used for the animated waves -->
