@@ -9,7 +9,7 @@
                        name="title" 
                        id="title" 
                        placeholder="What needs to be done?" 
-                       class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500" 
+                       class="w-full pl-4 pr-2 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500" 
                        required>
             </div>
             
@@ -20,7 +20,7 @@
                     id="description" 
                     placeholder="Add more details (optional)" 
                     rows="1" 
-                    class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    class="w-full pl-4 pr-2 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
                 ></textarea>
             </div>
         

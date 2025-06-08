@@ -1,7 +1,7 @@
 <button 
     type="submit" 
     :disabled="loading"
-    class="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-101 hover:from-orange-600 hover:to-orange-700"
+    class="group inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-101 hover:from-orange-600 hover:to-orange-700"
     :class="loading ? 'opacity-50 cursor-not-allowed' : ''"
 >
     <!-- Loading spinner -->
