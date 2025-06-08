@@ -16,7 +16,7 @@
             Create an Account
         </h1>
         
-        <form method="POST" action="" class="space-y-6">
+        <form method="POST" action="/register" class="space-y-6">
             @csrf
             
             <div>
@@ -37,7 +37,7 @@
                 <input type="email" 
                        id="email" 
                        name="email" 
-                       value="{{ old('email') }}"
+                        value="{{ old('email') }}"
                        class="w-full px-4 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
                        required>
                 @error('email')
@@ -74,7 +74,7 @@
         
         <p class="text-center text-zinc-400 mt-6">
             Already have an account? 
-            <a href="" class="text-orange-400 hover:text-orange-300 transition-colors">Sign in</a>
+            <a href="/login" class="text-orange-400 hover:text-orange-300 transition-colors">Sign in</a>
         </p>
     </div>
 </body>
