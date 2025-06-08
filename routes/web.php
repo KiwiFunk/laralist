@@ -1,8 +1,20 @@
 <?php               //PHP opening tag
 
+// Import Controllers
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
-// API Endpoints for Task Management
+// Authentication routes
+Route::get('/login', [LoginController::class, 'showLoginForm']);                 // Show the login form
+Route::post('/login', [LoginController::class, 'login']);                       // Send login request to LoginController
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm']);    // Show the registration form
+Route::post('/register', [RegisterController::class, 'register']);              // Send registration request
+
+Route::post('/logout', [LoginController::class, 'logout']);                     // Handle logout request
+
+// Routes for task management
 Route::get('/', function () {
     return view('welcome'); // Show the welcome page
 });
