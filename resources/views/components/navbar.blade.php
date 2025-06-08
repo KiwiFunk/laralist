@@ -23,12 +23,25 @@
 
             <!-- Right: Auth Buttons -->
             <div class="flex gap-3">
-                <a href="{{ url('register') }}" class="px-5 py-2 flex items-center justify-center bg-zinc-800 text-zinc-100 font-semibold rounded-xl border-2 border-zinc-700 hover:border-orange-500 transition-all duration-300 hover:cursor-pointer">
-                    Register
-                </a>
-                <a href="{{ url('/login') }}" class="px-5 py-2 flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl hover:cursor-pointer">
-                    Log In
-                </a>
+                <!-- Conditionally display auth buttons depending on authentication status -->
+                @auth
+                    <form method="POST" action="/logout" class="inline">
+                        @csrf
+                        <button 
+                            type="submit" 
+                            class="px-5 py-2 bg-zinc-800 text-zinc-100 font-semibold rounded-xl border-2 border-zinc-700 hover:border-red-500 hover:text-red-400 transition-all duration-300 hover:cursor-pointer"
+                        >
+                            Logout
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ url('register') }}" class="px-5 py-2 flex items-center justify-center bg-zinc-800 text-zinc-100 font-semibold rounded-xl border-2 border-zinc-700 hover:border-orange-500 transition-all duration-300 hover:cursor-pointer">
+                        Register
+                    </a>
+                    <a href="{{ url('/login') }}" class="px-5 py-2 flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl hover:cursor-pointer">
+                        Log In
+                    </a>
+                @endauth
             </div>
 
             <!-- Future Enhancement: User Profile Dropdown -->
