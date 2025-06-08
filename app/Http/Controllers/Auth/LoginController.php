@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/tasks');
         }
-        
+
         // If login fails, redirect back with an error message
         return back()->withErrors([
             'email' => 'Your details didn\'t seem to match. Please try again!',
