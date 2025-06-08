@@ -10,6 +10,9 @@
     <!-- Animated Wave Background -->
     @include('partials.waves-background')
 
+    <!-- Navigation Bar -->
+    <x-navbar />
+
     <!-- Main Content -->
     <div class="relative z-10 flex items-center justify-center min-h-screen">
         <div class="text-center max-w-4xl px-6 py-12">
