@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <div class="relative z-10 flex items-center justify-center min-h-screen">
+    <div class="relative z-10 flex items-center justify-center">
         <div class="text-center max-w-4xl px-6 py-12">
             <!-- Logo/Brand Section -->
             <div class="mb-8">

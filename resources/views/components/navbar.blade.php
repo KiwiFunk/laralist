@@ -1,9 +1,9 @@
 <!-- Page Container -->
-<div class="w-full px-6">
+<div class="w-full px-6 pt-4">
     <!-- Centered Content with Max Width -->
     <div class="max-w-7xl mx-auto">
         <!-- Navbar -->
-        <div class="z-10 my-4 p-4 bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl shadow-xl flex items-center justify-between">    
+        <div class="z-10 p-4 bg-zinc-800/70 border border-zinc-700 rounded-xl flex items-center justify-between">    
             <!-- Left: Logo and Title -->
             <div class="flex items-center gap-2">
                 <!-- Logo -->

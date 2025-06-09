@@ -19,7 +19,7 @@
 
     <!-- Animated Wave Background -->
     @include('partials.waves-background')
-
+    
     <!-- Conditional Navigation (only show on app pages, not auth pages) -->
     @yield('navbar')
 
