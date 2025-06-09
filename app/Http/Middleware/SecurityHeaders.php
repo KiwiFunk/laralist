@@ -35,9 +35,6 @@ class SecurityHeaders
             $response->headers->set('Content-Security-Policy', $csp);
         }
         
-        // REMOVE THIS LINE - it's the duplicate causing the error
-        // $response->headers->set('Content-Security-Policy', $csp);
-
         return $response;
     }
 }
