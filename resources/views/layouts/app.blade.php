@@ -15,7 +15,7 @@
     @stack('head')
 </head>
 
-<body class="@yield('body-class', 'bg-zinc-900 text-zinc-100 min-h-screen relative overflow-x-hidden')">
+<body class="bg-zinc-900 text-zinc-100 min-h-screen relative overflow-x-hidden">
 
     <!-- Animated Wave Background -->
     @include('partials.waves-background')

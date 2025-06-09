@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register | LaraList</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body class="bg-zinc-900 text-zinc-100 min-h-screen flex items-center justify-center">
-    
-    <!-- Animated Wave Background -->
-    @include('partials.waves-background')
-    
-    <div class="relative z-10 max-w-md w-full bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-8 shadow-xl">
+@extends('layouts.app')
+
+@section('title', 'Register | LaraList')
+
+@section('content')    
+    <div class="relative z-10 max-w-md w-full bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-8 shadow-xl mx-auto mt-[50%]">
         <h1 class="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
             Create an Account
         </h1>
@@ -77,5 +69,4 @@
             <a href="/login" class="text-orange-400 hover:text-orange-300 transition-colors">Sign in</a>
         </p>
     </div>
-</body>
-</html>
+@endsection

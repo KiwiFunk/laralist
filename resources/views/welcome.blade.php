@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Laralist</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-zinc-900 text-gray-100 overflow-hidden">
+@extends('layouts.app')
 
-    <!-- Animated Wave Background -->
-    @include('partials.waves-background')
+@section('title', 'LaraList')
 
-    <!-- Navigation Bar -->
+@section('navbar')
     <x-navbar />
+@endsection
 
-    <!-- Main Content -->
+@section('content')
     <div class="relative z-10 flex items-center justify-center min-h-screen">
         <div class="text-center max-w-4xl px-6 py-12">
             <!-- Logo/Brand Section -->
@@ -84,6 +77,4 @@
             </div>
         </div>
     </div>
-
-</body>
-</html>
+@endsection
