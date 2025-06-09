@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Task;        // Import the Task model
+use App\Models\Task;                    // Import the Task model
+use Illuminate\Support\Facades\Auth;    // Import the Auth facade for auth functionality
 
 class TaskController extends Controller
 {
