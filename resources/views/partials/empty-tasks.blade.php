@@ -6,10 +6,5 @@
     </div>
     <h3 class="text-2xl font-bold text-zinc-400 mb-2">No tasks yet!</h3>
     <p class="text-zinc-500 mb-8">Create your first task to get started on your productivity journey.</p>
-    <a href="/tasks/create" class="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
-        </svg>
-        Create Your First Task
-    </a>
+    
 </div>
