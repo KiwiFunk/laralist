@@ -12,7 +12,34 @@
         Your Tasks
     </h1>
     @Auth
-        <p class="text-zinc-400 text-lg ">Hi, {{ Auth::user()->name }}. What are we doing today?</p>
+        <p 
+            x-data="{ 
+                prefix: '',
+                greeting: '',
+                init() {
+                    this.prefix = this.getPrefix();
+                    this.greeting = this.getGreeting();
+                },
+                getPrefix() {
+                    const hours = new Date().getHours();
+                    if (hours < 12) return 'Good morning';
+                    if (hours < 18) return 'Good afternoon';
+                    return 'Good evening';
+                },
+                getGreeting() {
+                    const randomGreetings = [
+                        'What are we doing today?',
+                        'What can I help you with?',
+                        'What do you need to get done today?',
+                        'What tasks are on your mind?'
+                    ];
+                    return randomGreetings[Math.floor(Math.random() * randomGreetings.length)];
+                }
+            }"
+            class="text-zinc-400 text-lg"
+        >
+            <span x-text="prefix"></span>, {{ Auth::user()->name }}. <span x-text="greeting"></span>
+        </p>
     @else
         <p class="text-zinc-400 text-lg">Hey! You shouldn't be here! How did you get here without logging in?!</p>
     @endAuth
