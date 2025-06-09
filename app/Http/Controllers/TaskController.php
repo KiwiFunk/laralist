@@ -17,9 +17,23 @@ class TaskController extends Controller
 
     // Store a new task 
     public function store(Request $request) {
+
+        // Validate the request data
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',           // Title is required, must be a string, and max length of 255 characters
+            'description' => 'nullable|string|max:1000',    // Description is optional, must be a string, and max length of 1000 characters
+        ], [
+            // Custom validation error messages
+            'title.required' => 'The title field is required.',
+            'title.string' => 'The title must be a string.',
+            'title.max' => 'The title may not be greater than 255 characters.',
+            'description.string' => 'The description must be a string.',
+            'description.max' => 'The description may not be greater than 1000 characters.',
+        ]);
+
         $task = Auth::user()->tasks()->create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
+            'title' => $validated['title'],
+            'description' => $validated['description'] ?? null, // Use null if description is not provided
             'completed' => false,
         ]);
 
@@ -45,12 +59,15 @@ class TaskController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        // Update the task with request data
-        $task->update([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'completed' => $request->input('completed', false), // Default to false if not provided
+        // Validate the request data
+        $validated = $request->validate([
+            'title' => 'required|string|max:255|min:1',
+            'description' => 'nullable|string|max:1000',
+            'completed' => 'sometimes|boolean',
         ]);
+
+        // Update the task with validated data
+        $task->update($validated);
 
         // If it's an AJAX request, return JSON
         if ($request->ajax()) {
