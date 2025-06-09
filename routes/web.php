@@ -11,7 +11,7 @@ Route::get('/', function () {
 });
 
 // Guest-only routes (already logged in users redirected)
-Route::middleware('guest')->group(function () {
+Route::middleware(['guest', 'throttle:10,1'])->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
     Route::get('/register', [RegisterController::class, 'showRegistrationForm']);
@@ -22,7 +22,7 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // Routes for task management (Protected routes)
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'throttle:100,1'])->group(function () {
     Route::get('/tasks', [TaskController::class, 'index']);                         // Show all tasks
     Route::post('/tasks', [TaskController::class, 'store']);                        // Handle new task submission
     Route::put('/tasks/{task}', [TaskController::class, 'update']);                 // Update an existing task
