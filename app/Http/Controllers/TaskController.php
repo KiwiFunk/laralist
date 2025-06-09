@@ -84,7 +84,12 @@ class TaskController extends Controller
 
     // Toggle task completion status
     public function toggleStatus(Task $task) {
-        // Using route model binding, the $task parameter will automatically be resolved to the Task model instance
+
+        // Make sure the user owns the task
+        if ($task->user_id !== Auth::id()) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+        
         $task->completed = !$task->completed; // Toggle the completed status
         $task->save(); // Save the updated task
 
@@ -102,7 +107,9 @@ class TaskController extends Controller
 
     // Delete a task 
     public function delete($id) {
-       $task = Auth::user()->tasks()->findOrFail($id);  // Find the task by ID, only searching within the authenticated user's tasks
+
+        // User scoped to ensure the task belongs to the authenticated user
+        $task = Auth::user()->tasks()->findOrFail($id);  
         $task->delete(); // Delete the task
 
         // If AJAX, return JSON response
