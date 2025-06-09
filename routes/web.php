@@ -10,14 +10,16 @@ Route::get('/', function () {
     return view('welcome'); // Show the welcome page
 });
 
-// Authentication routes
-Route::get('/login', [LoginController::class, 'showLoginForm']);                    // Show the login form
-Route::post('/login', [LoginController::class, 'login'])->name('login');            // Send login request to LoginController (Route name needed for auth middleware)
+// Guest-only routes (already logged in users redirected)
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm']);
+    Route::post('/register', [RegisterController::class, 'register']);
+});
 
-Route::get('/register', [RegisterController::class, 'showRegistrationForm']);       // Show the registration form
-Route::post('/register', [RegisterController::class, 'register']);                  // Send registration request
-
-Route::post('/logout', [LoginController::class, 'logout']);                         // Handle logout request
+// Logout (authenticated users only)
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // Routes for task management (Protected routes)
 Route::middleware('auth')->group(function () {
