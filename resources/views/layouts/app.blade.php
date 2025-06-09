@@ -15,16 +15,18 @@
     @stack('head')
 </head>
 
-<body class="bg-zinc-900 text-zinc-100 min-h-screen relative overflow-x-hidden">
+<body class="bg-zinc-900 text-zinc-100 min-h-screen relative">
 
     <!-- Animated Wave Background -->
     @include('partials.waves-background')
     
     <!-- Conditional Navigation (only show on app pages, not auth pages) -->
-    @yield('navbar')
+    @hasSection('navbar')
+        @yield('navbar')
+    @endif
 
     <!-- Main Content -->
-    <main>
+    <main class="relative z-10">
         @yield('content')
     </main>
 

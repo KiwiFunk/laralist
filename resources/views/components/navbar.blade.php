@@ -1,9 +1,9 @@
 <!-- Page Container -->
-<div class="w-full px-6 pt-4">
+<div class="fixed top-0 left-0 right-0 z-50 p-6">
     <!-- Centered Content with Max Width -->
     <div class="max-w-7xl mx-auto">
         <!-- Navbar -->
-        <div class="z-10 p-4 bg-zinc-800/70 border border-zinc-700 rounded-xl flex items-center justify-between">    
+        <div class="bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-4 flex items-center justify-between">    
             <!-- Left: Logo and Title -->
             <div class="flex items-center gap-2">
                 <!-- Logo -->
@@ -22,7 +22,7 @@
             </div>
 
             <!-- Right: Auth Buttons -->
-            <div class="flex gap-3">
+            <div class="flex items-center gap-3">
                 <!-- Conditionally display auth buttons depending on authentication status -->
                 @auth
                     <form method="POST" action="/logout" class="inline">
@@ -35,10 +35,10 @@
                         </button>
                     </form>
                 @else
-                    <a href="{{ url('register') }}" class="px-5 py-2 flex items-center justify-center bg-zinc-800 text-zinc-100 font-semibold rounded-xl border-2 border-zinc-700 hover:border-orange-500 transition-all duration-300 hover:cursor-pointer">
+                    <a href="/register" class="px-5 py-2 flex items-center justify-center bg-zinc-800 text-zinc-100 font-semibold rounded-xl border-2 border-zinc-700 hover:border-orange-500 transition-all duration-300 hover:cursor-pointer">
                         Register
                     </a>
-                    <a href="{{ url('/login') }}" class="px-5 py-2 flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl hover:cursor-pointer">
+                    <a href="/login" class="px-5 py-2 flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl hover:cursor-pointer">
                         Log In
                     </a>
                 @endauth

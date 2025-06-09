@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <div class="relative z-10 max-w-6xl mx-auto px-6 py-12">
+    <div class="max-w-6xl mx-auto px-8 py-12 pt-40">
 
         <!-- Header Section -->
         @include('partials.header')

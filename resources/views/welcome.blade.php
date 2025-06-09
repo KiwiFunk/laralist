@@ -7,8 +7,10 @@
 @endsection
 
 @section('content')
-    <div class="relative z-10 flex items-center justify-center">
-        <div class="text-center max-w-4xl px-6 py-12">
+    <!-- Page Container -->
+    <div class="min-h-screen flex items-center justify-center px-6">
+        <!-- Content Container -->
+        <div class="text-center max-w-4xl pt-20 pb-12">
             <!-- Logo/Brand Section -->
             <div class="mb-8">
                 <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full mb-6 shadow-2xl">
@@ -17,8 +19,7 @@
                     </svg>
                 </div>
                 <h1 class="text-6xl md:text-7xl font-black tracking-tight mb-4">
-                    <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">Lara<span class="text-zinc-100">list</span></span>
-                    
+                    <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">Lara<span class="text-zinc-100">list</span></span>                
                 </h1>
             </div>
 
@@ -48,7 +49,7 @@
                             Log In
                         </span>
                     </a>
-                    
+                        
                     <a href="/register" class="group px-8 py-4 bg-zinc-800 text-zinc-100 font-semibold rounded-xl border-2 border-zinc-700 hover:border-orange-500 transition-all duration-300 transform hover:scale-105 hover:bg-gray-750">
                         <span class="flex items-center justify-center gap-2">
                             <svg class="w-5 h-5 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
