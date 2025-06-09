@@ -39,6 +39,11 @@ class TaskController extends Controller
 
         // Using route model binding, the $task parameter will automatically be resolved to the Task model instance
 
+        // Ensure the target task belongs to the authenticated user
+        if ($task->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }
+        
         // Update the task with request data
         $task->update([
             'title' => $request->input('title'),
