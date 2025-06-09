@@ -43,7 +43,7 @@ class TaskController extends Controller
         if ($task->user_id !== Auth::id()) {
             abort(403, 'Unauthorized');
         }
-        
+
         // Update the task with request data
         $task->update([
             'title' => $request->input('title'),
@@ -84,7 +84,7 @@ class TaskController extends Controller
 
     // Delete a task 
     public function delete($id) {
-        $task = Task::findOrFail($id); // Find the task
+       $task = Auth::user()->tasks()->findOrFail($id);  // Find the task by ID, only searching within the authenticated user's tasks
         $task->delete(); // Delete the task
 
         // If AJAX, return JSON response
