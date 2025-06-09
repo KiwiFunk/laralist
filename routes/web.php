@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 // Authentication routes
 Route::get('/login', [LoginController::class, 'showLoginForm']);                    // Show the login form
-Route::post('/login', [LoginController::class, 'login']);                           // Send login request to LoginController
+Route::post('/login', [LoginController::class, 'login'])->name('login');            // Send login request to LoginController (Route name needed for auth middleware)
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm']);       // Show the registration form
 Route::post('/register', [RegisterController::class, 'register']);                  // Send registration request
