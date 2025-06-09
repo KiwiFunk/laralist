@@ -9,13 +9,14 @@ class TaskController extends Controller
 {
     // Fetch all tasks
     public function index() {
-        $tasks = Task::all(); // Task inherits from Model, so we can use Eloquent methods
+        // Only show tasks for the authenticated user
+        $tasks = Auth::user()->tasks; 
         return view('tasks.index', ['tasks' => $tasks]); // Pass the data into the view
     }
 
     // Store a new task 
     public function store(Request $request) {
-        $task = Task::create([
+        $task = Auth::user()->tasks()->create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'completed' => false,
