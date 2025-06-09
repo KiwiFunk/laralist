@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-        $table->id();                                           // Unique ID for each task
-        $table->string('title');                                // Task name (e.g., "Buy groceries")
-        $table->text('description')->nullable();                // Optional task details
-        $table->boolean('completed')->default(false);           // Whether the task is done
-        $table->timestamps();                                   // Auto-generated timestamps (created_at & updated_at)
+        $table->id();                                                       // Unique ID for each task
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');   // Foreign key to link tasks to users, with cascade delete
+        $table->string('title');                                            // Task name (e.g., "Buy groceries")
+        $table->text('description')->nullable();                            // Optional task details
+        $table->boolean('completed')->default(false);                       // Whether the task is done
+        $table->timestamps();                                               // Auto-generated timestamps (created_at & updated_at)
     });
 
     }
