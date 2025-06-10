@@ -16,12 +16,7 @@ export default defineConfig({
                 manualChunks: undefined,
             },
         },
-        // Ensure Alpine.js works in production
-        minify: 'terser',
-        terserOptions: {
-            compress: {
-                drop_console: false, // Keep console logs for debugging
-            },
-        },
+        // Use Vite's default minification (esbuild)
+        minify: true, // This uses esbuild, which is faster and Alpine.js-friendly
     },
 });
