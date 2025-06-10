@@ -32,5 +32,20 @@
 
     <!-- Additional scripts -->
     @stack('scripts')
+
+    <!-- Alpine.js debugging -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded');
+        console.log('Alpine available:', typeof Alpine !== 'undefined');
+        console.log('Alpine version:', Alpine?.version);
+        
+        // Check if Alpine store is working
+        setTimeout(() => {
+            console.log('Task store:', Alpine?.store('taskManager'));
+            console.log('Tasks data:', document.querySelector('meta[name="tasks-data"]')?.content);
+        }, 1000);
+    });
+    </script>
 </body>
 </html>
