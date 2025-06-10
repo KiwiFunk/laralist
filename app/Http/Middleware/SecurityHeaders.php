@@ -26,11 +26,15 @@ class SecurityHeaders
         
         // Only enable CSP in production
         if (app()->environment('production')) {
+            // Get the app URL for CSP
+            $appUrl = config('app.url', 'https://laralist.vercel.app');
+            
             $csp = "default-src 'self'; " .
-                   "script-src 'self' 'unsafe-inline'; " .
-                   "style-src 'self' 'unsafe-inline'; " .
+                   "script-src 'self' 'unsafe-inline' {$appUrl}; " .
+                   "style-src 'self' 'unsafe-inline' {$appUrl}; " .
                    "img-src 'self' data: https:; " .
-                   "font-src 'self' https:;";
+                   "font-src 'self' https:; " .
+                   "connect-src 'self' {$appUrl};";
             
             $response->headers->set('Content-Security-Policy', $csp);
         }
