@@ -10,4 +10,18 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: undefined,
+            },
+        },
+        // Ensure Alpine.js works in production
+        minify: 'terser',
+        terserOptions: {
+            compress: {
+                drop_console: false, // Keep console logs for debugging
+            },
+        },
+    },
 });
