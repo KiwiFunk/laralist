@@ -5,7 +5,7 @@
         <!-- Navbar -->
         <div class="bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-4 flex items-center justify-between">    
             <!-- Left: Logo and Title -->
-            <div class="flex items-center gap-2">
+            <a href="/" class="flex items-center gap-2">
                 <!-- Logo -->
                 <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-orange-500 to-orange-600 rounded-full shadow-lg">
                     <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -19,7 +19,7 @@
                         Lara<span class="text-zinc-100">list</span>
                     </span>
                 </h1>
-            </div>
+            </a>
 
             <!-- Right: Auth Buttons -->
             <div class="flex items-center gap-3">
