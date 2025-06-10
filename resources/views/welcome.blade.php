@@ -10,7 +10,7 @@
     <!-- Page Container -->
     <div class="min-h-screen flex items-center justify-center px-6">
         <!-- Content Container -->
-        <div class="text-center max-w-4xl pt-20 pb-12">
+        <div class="text-center max-w-4xl pt-35 md:pt-20 pb-12">
             <!-- Logo/Brand Section -->
             <div class="mb-8">
                 <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full mb-6 shadow-2xl">
