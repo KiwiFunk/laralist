@@ -6,6 +6,9 @@
 
 ![LaraList Preview](https://img.shields.io/badge/Status-Live-brightgreen) ![Laravel](https://img.shields.io/badge/Laravel-12-red) ![Alpine.js](https://img.shields.io/badge/Alpine.js-3.x-blue) ![Tailwind](https://img.shields.io/badge/Tailwind-4.x-cyan)
 
+**Give it a go!**  
+User: `test@test.com`  
+Password: `testpass123`
 <br>
 
 ## Features
