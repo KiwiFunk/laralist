@@ -30,7 +30,7 @@ class SecurityHeaders
             $appUrl = config('app.url', 'https://laralist.vercel.app');
             
             $csp = "default-src 'self'; " .
-                   "script-src 'self' 'unsafe-inline' {$appUrl}; " .
+                   "script-src 'self' 'unsafe-inline' 'unsafe-eval' {$appUrl}; " .
                    "style-src 'self' 'unsafe-inline' {$appUrl}; " .
                    "img-src 'self' data: https:; " .
                    "font-src 'self' https:; " .
