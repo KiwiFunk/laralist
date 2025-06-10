@@ -1,5 +1,5 @@
 <!-- Page Container -->
-<div class="fixed top-0 left-0 right-0 z-50 p-6">
+<div class="top-0 left-0 right-0 z-50 p-6">
     <!-- Centered Content with Max Width -->
     <div class="max-w-7xl mx-auto">
         <!-- Navbar -->
