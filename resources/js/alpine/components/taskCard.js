@@ -9,12 +9,54 @@ export function taskCard(taskId) {
             return this.$store.taskManager.tasks.find(t => t.id === this.taskId);
         },
 
-        // Update the Task
+        async toggleTaskStatus() {
+            // OPTIMISTIC UPDATE - Update UI immediately
+            const originalStatus = this.task.completed;
+            this.$store.taskManager.toggleTask(this.taskId);
+            
+            try {
+                const response = await fetch(`/tasks/${this.taskId}/toggle`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+                    }
+                });
+
+                const data = await response.json();
+
+                if (!data.success) {
+                    // ROLLBACK - Revert optimistic update on failure
+                    this.$store.taskManager.toggleTask(this.taskId);
+                    alert('Failed to update task status. Please try again.');
+                }
+                // If successful, optimistic update was correct - no action needed
+            } catch (error) {
+                // ROLLBACK - Revert optimistic update on error
+                this.$store.taskManager.toggleTask(this.taskId);
+                console.error('Error toggling task status:', error);
+                alert('Network error. Please check your connection.');
+            }
+        },
+
         async updateTask() {
+            // Show loading state for updates
             this.loading = true;
+            
             try {
                 const form = this.$refs.editForm;
                 const formData = new FormData(form);
+
+                // OPTIMISTIC UPDATE - Update store immediately
+                const newData = {
+                    title: formData.get('title'),
+                    description: formData.get('description'),
+                    completed: formData.has('completed')
+                };
+                
+                const originalTask = { ...this.task };
+                this.$store.taskManager.updateTask(this.taskId, newData);
+                this.isEditing = false; // Close edit form immediately
 
                 const response = await fetch(form.action, {
                     method: 'POST',
@@ -28,39 +70,26 @@ export function taskCard(taskId) {
                 const data = await response.json();
 
                 if (data.success) {
-                    this.isEditing = false;
+                    // Update with server response (might have additional fields)
                     this.$store.taskManager.updateTask(data.task.id, data.task);
-                    console.log('Task updated successfully:', data.task);
                 } else {
-                    alert('Oops! Something went wrong while updating the task.');
+                    // ROLLBACK - Restore original data
+                    this.$store.taskManager.updateTask(this.taskId, originalTask);
+                    this.isEditing = true; // Reopen edit form
+                    alert('Failed to update task. Please try again.');
                 }
+                
             } catch (error) {
+                // ROLLBACK - Restore original data
+                const originalTask = this.$store.taskManager.tasks.find(t => t.id === this.taskId);
+                if (originalTask) {
+                    this.$store.taskManager.updateTask(this.taskId, originalTask);
+                }
+                this.isEditing = true; // Reopen edit form
                 console.error('Error updating task:', error);
-                alert('An error occurred while updating the task. Please try again.');
+                alert('Network error. Please try again.');
             } finally {
                 this.loading = false;
-            }
-        },
-
-        // Toggle Task Status
-        async toggleTaskStatus() {
-            try {
-                const response = await fetch(`/tasks/${this.taskId}/toggle`, {
-                    method: 'POST',
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
-                    }
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    this.$store.taskManager.toggleTask(this.taskId);
-                    console.log(data.message);
-                }
-            } catch (error) {
-                console.error('Error toggling task status:', error);
             }
         },
 
