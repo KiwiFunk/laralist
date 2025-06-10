@@ -76,6 +76,38 @@
                     <div class="text-zinc-400 text-sm">Styled with Tailwind</div>
                 </div>
             </div>
+
+            <!-- GitHub Badge Section -->
+            <div class="flex flex-wrap justify-center gap-3 mt-8">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-500/20 text-orange-400 border border-orange-500/30">
+                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Live Demo
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-zinc-700/50 text-zinc-300 border border-zinc-600">
+                    Laravel 12
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-zinc-700/50 text-zinc-300 border border-zinc-600">
+                    Alpine.js 3.x
+                </span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-zinc-700/50 text-zinc-300 border border-zinc-600">
+                    Tailwind CSS
+                </span>
+                <a href="https://github.com/KiwiFunk/laralist" target="_blank" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-zinc-800 text-zinc-300 border border-zinc-600 hover:border-orange-500 transition-colors">
+                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 25 25">
+                        <path fill-rule="evenodd" d="M12.017 1.2C5.5 1.2.983 5.718.983 12.236c0 4.86 3.152 8.983 7.523 10.437.55.101.75-.238.75-.53 0-.262-.01-.952-.015-1.87-3.06.665-3.706-1.475-3.706-1.475-.5-1.27-1.222-1.608-1.222-1.608-.999-.683.075-.669.075-.669 1.105.078 1.685 1.134 1.685 1.134.981 1.68 2.575 1.195 3.202.914.1-.71.384-1.195.698-1.47-2.442-.278-5.01-1.222-5.01-5.437 0-1.2.428-2.183 1.132-2.952-.113-.278-.49-1.397.108-2.91 0 0 .923-.295 3.025 1.127A10.536 10.536 0 0112.017 6.52c.924.004 1.856.125 2.728.368 2.1-1.422 3.022-1.127 3.022-1.127.6 1.513.222 2.632.11 2.91.705.769 1.131 1.751 1.131 2.952 0 4.226-2.572 5.156-5.022 5.428.395.34.747 1.01.747 2.037 0 1.47-.013 2.658-.013 3.017 0 .295.199.636.756.528 4.367-1.456 7.515-5.579 7.515-10.434C23.051 5.718 18.535 1.2 12.017 1.2z" clip-rule="evenodd"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+
+            <div class="mt-6 text-zinc-500 text-sm">
+                Built with ❤️ by 
+                <a href="https://kiwifunk.com" target="_blank" class="text-orange-400 hover:text-orange-300 transition-colors">
+                    @KiwiFunk
+                </a>
+            </div>
         </div>
     </div>
 @endsection

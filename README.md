@@ -11,6 +11,8 @@ User: `test@test.com`
 Password: `testpass123`
 <br>
 
+(Please be respectable. I am not responsible for content posted here, and will do my best to periodically clean it up.)
+
 ## Features
 
 ### **Core Functionality**
