@@ -1,4 +1,4 @@
-<div class="flex items-center gap-3 ml-6">
+<div class="flex flex-col md:flex-row items-center gap-3 ml-6">
     <!-- Edit Task -->
     <button @click="isEditing = !isEditing" 
         class="group/btn p-2 bg-zinc-700/50 rounded-lg hover:bg-orange-500/20 border border-zinc-600 hover:border-orange-500/50 transition-all duration-300 hover:cursor-pointer">
