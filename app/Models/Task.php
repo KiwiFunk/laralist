@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [     // $fillable allows mass assignment for ONLY these fields
-        'user_id',              // Foreign key to the user who owns the task
+        'project_id',           // Foreign key to the project the task belongs to
         'title',                // Task name (e.g., "Buy groceries")
         'description',          // Optional task details
         'completed',            // Whether the task is done
     ];
 
-    // Relationship: Task belongs to a User
-    public function user()
+    // Relationship: Task belongs to a Project
+    public function project()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Project::class);
     }
 }
