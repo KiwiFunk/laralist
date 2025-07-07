@@ -13,6 +13,12 @@ class Task extends Model
         'completed',            // Whether the task is done
     ];
 
+    protected $casts = [
+        'completed' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
     // Relationship: Task belongs to a Project
     public function project()
     {
