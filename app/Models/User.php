@@ -9,35 +9,22 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    // Mass assignable attributes
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    // Hidden attributes for serialization
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    // Cast attributes
     protected function casts(): array
     {
         return [
@@ -50,5 +37,11 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+
+    // All tasks across every project for this user
+    public function tasks()
+    {
+        return $this->hasManyThrough(Task::class, Project::class);
     }
 }
