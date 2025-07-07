@@ -24,4 +24,10 @@ class Task extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    // Access the user through the parent project
+    public function user()
+    {
+        return $this->hasOneThrough(User::class, Project::class, 'id', 'id', 'project_id', 'user_id');
+    }
 }
