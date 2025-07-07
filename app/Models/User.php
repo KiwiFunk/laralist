@@ -34,7 +34,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Get attributes that should be cast.
      *
      * @return array<string, string>
      */
@@ -46,8 +46,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function tasks()
+    // Database relationships
+    public function projects()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Project::class);
     }
 }
