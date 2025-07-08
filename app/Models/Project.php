@@ -26,4 +26,20 @@ class Project extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Helper methods for project stats (Use these to fetch data on the projects page)
+    public function getCompletedTasksCountAttribute()
+    {
+        return $this->tasks()->where('completed', true)->count();
+    }
+
+    public function getPendingTasksCountAttribute()
+    {
+        return $this->tasks()->where('completed', false)->count();
+    }
+
+    public function getTotalTasksCountAttribute()
+    {
+        return $this->tasks()->count();
+    }
 }
