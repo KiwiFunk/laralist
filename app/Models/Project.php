@@ -10,7 +10,6 @@ class Project extends Model
         'user_id',          // Foreign key to the user who owns the project
         'name',             // Project name (e.g., "Home Renovation")
         'description',      // Optional project details
-        'tasks',            // Array of tasks associated with the project
     ];
 
     protected $casts = [
