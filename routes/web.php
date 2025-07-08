@@ -22,6 +22,12 @@ Route::middleware(['guest', 'throttle:10,1'])->group(function () {
 // Logout (authenticated users only)
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
+// Routes for project handling (Protected)
+Route::middleware(['auth', 'throttle:20,1'])->group(function () {
+    Route::get('/projects', [ProjectController::class, 'index']);
+    Route::post('/projects', [ProjectController::class, 'store']);
+});
+
 // Routes for task management (Protected routes)
 Route::middleware(['auth', 'throttle:100,1'])->group(function () {
     Route::get('/tasks', [TaskController::class, 'index']);                         // Show all tasks
