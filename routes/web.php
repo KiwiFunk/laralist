@@ -22,17 +22,20 @@ Route::middleware(['guest', 'throttle:10,1'])->group(function () {
 // Logout (authenticated users only)
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
-// Routes for project handling (Protected)
-Route::middleware(['auth', 'throttle:20,1'])->group(function () {
-    Route::get('/projects', [ProjectController::class, 'index']);
-    Route::post('/projects', [ProjectController::class, 'store']);
-});
-
-// Routes for task management (Protected routes)
+// Protected routes for authenticated users
 Route::middleware(['auth', 'throttle:100,1'])->group(function () {
-    Route::get('/tasks', [TaskController::class, 'index']);                         // Show all tasks
-    Route::post('/tasks', [TaskController::class, 'store']);                        // Handle new task submission
-    Route::put('/tasks/{task}', [TaskController::class, 'update']);                 // Update an existing task
-    Route::post('/tasks/{task}/toggle', [TaskController::class, 'toggleStatus']);   // Toggle task status
-    Route::delete('/tasks/{id}', [TaskController::class, 'delete']);                // Delete a task
+    
+    // Project routes
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');               // Get all projects
+    Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');              // Handle project creation
+    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');       // Get specified project
+    //Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+    //Route::delete('/projects/{project}', [ProjectController::class, 'delete'])->name('projects.destroy');
+    
+    // Task routes (nested under projects)
+    Route::post('/projects/{project}/tasks', [TaskController::class, 'store'])->name('tasks.store');    // Handle new task submission
+    Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');               // Update an existing task
+    Route::post('/tasks/{task}/toggle', [TaskController::class, 'toggleStatus'])->name('tasks.toggle'); // Toggle task status
+    Route::delete('/tasks/{id}', [TaskController::class, 'delete']);                                    // Delete a task
+    
 });
