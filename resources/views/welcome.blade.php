@@ -32,12 +32,12 @@
             <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
                 @auth
-                    <a href="/tasks" class="group px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 hover:from-orange-600 hover:to-orange-700">
+                    <a href="/projects" class="group px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-orange-500/25 transition-all duration-300 transform hover:scale-105 hover:from-orange-600 hover:to-orange-700">
                         <span class="flex items-center justify-center gap-2">
                             <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            View Your Tasks
+                            View Your Projects
                         </span>
                     </a>
                 @else
