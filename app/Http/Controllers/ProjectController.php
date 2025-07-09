@@ -33,7 +33,6 @@ class ProjectController extends Controller
         return view('projects.display', compact('project', 'tasks'));
     }
 
-
     // Store a new Project
     public function store(Request $request)
     {
@@ -54,7 +53,7 @@ class ProjectController extends Controller
             ]);
         }
         // Else redirect to index
-        return redirect()->route('index');
+        return redirect()->route('projects.index');
     }
 
     // Update a project
