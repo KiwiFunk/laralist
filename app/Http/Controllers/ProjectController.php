@@ -57,4 +57,25 @@ class ProjectController extends Controller
     }
 
     // Update a project
+
+    // DELETE a project
+    public function destroy(Project $project)
+    {
+        // Ensure the authenticated user owns this project
+        if ($project->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }
+
+        $project->delete(); // This will cascade delete all tasks
+
+        // If AJAX, return a JSON response
+        if (request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Project deleted successfully!',
+            ]);
+        }
+
+        return redirect()->route('projects.index');
+    }
 }
