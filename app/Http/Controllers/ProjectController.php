@@ -15,6 +15,25 @@ class ProjectController extends Controller
         return view('projects.index', ['projects' => $projects]);
     }
 
+    // GET a specific project by ID
+    public function show(Project $project)
+    {
+        // Ensure the authenticated user owns this project
+        if ($project->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access to this project.');
+        }
+
+        // Load the project's tasks
+        $tasks = $project->tasks()
+            ->orderBy('completed', 'asc') // Show pending tasks first
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Return a view and pass project/task data using compact
+        return view('projects.display', compact('project', 'tasks'));
+    }
+
+
     // Store a new Project
     public function store(Request $request)
     {
