@@ -57,9 +57,33 @@ class ProjectController extends Controller
     }
 
     // Update a project
+    public function update(Request $request, Project $project)
+    {
+        // Ensure the authenticated user owns this project
+        if ($project->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+        ]);
+
+        $project->update($validated);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'project' => $project->fresh(), // Make sure newest version is returned
+                'message' => 'Project updated successfully!'
+            ]);
+        }
+        // If no AJAX, redirect to the project specific page
+        return redirect()->route('projects.show', $project);
+    }
 
     // DELETE a project
-    public function destroy(Project $project)
+    public function delete(Project $project)
     {
         // Ensure the authenticated user owns this project
         if ($project->user_id !== Auth::id()) {
