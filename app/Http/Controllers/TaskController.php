@@ -9,15 +9,16 @@ use Illuminate\Support\Facades\Auth;    // Import the Auth facade for auth funct
 
 class TaskController extends Controller
 {
-    // Fetch all tasks
-    public function index() {
-        // Only show tasks for the authenticated user
-        $tasks = Auth::user()->tasks; 
-        return view('tasks.index', ['tasks' => $tasks]); // Pass the data into the view
-    }
+    /**
+     * Store a new task within an existing project.
+     * Route: POST /projects/{project}/tasks
+     */
+    public function store(Request $request, Project $project) {
 
-    // Store a new task 
-    public function store(Request $request) {
+        // Ensure the authenticated user owns this project
+        if ($project->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }
 
         // Validate the request data
         $validated = $request->validate([
@@ -32,10 +33,12 @@ class TaskController extends Controller
             'description.max' => 'The description may not be greater than 1000 characters.',
         ]);
 
-        $task = Auth::user()->tasks()->create([
+        // Create task with both project_id and user_id for flexibility
+        $task = $project->tasks()->create([
             'title' => $validated['title'],
-            'description' => $validated['description'] ?? null, // Use null if description is not provided
+            'description' => $validated['description'] ?? null,
             'completed' => false,
+            'user_id' => Auth::id(), // Link directly to user
         ]);
 
         // If AJAX, return JSON response
@@ -47,7 +50,7 @@ class TaskController extends Controller
             ]);
         }
         // Otherwise, redirect to tasks list
-        return redirect('/tasks'); 
+        return redirect()->route('projects.show', $project);
     }
 
     // Update an existing task
