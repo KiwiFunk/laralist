@@ -26,7 +26,7 @@ class LoginController extends Controller
         // Attempt to log in using the credentials and redirect to tasks if successful
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/tasks');
+            return redirect()->intended('/projects');
         }
 
         // If login fails, redirect back with an error message

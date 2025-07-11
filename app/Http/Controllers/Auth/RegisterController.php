@@ -41,6 +41,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         // Then redirect to the tasks page
-        return redirect('/tasks');
+        return redirect('/projects');
     }
 }
