@@ -7,27 +7,27 @@
 @endsection
 
 @section('content')
-    <div class="max-w-6xl mx-auto px-8 py-12 pt-40">
-        <!-- Header -->
-        <div class="mb-8">
-            <h1 class="text-4xl font-bold text-zinc-100 mb-2">Your Projects</h1>
-            <p class="text-zinc-400">Organize your tasks by project</p>
-        </div>
+    @if($projects->count() > 0)
+        <div class="max-w-6xl mx-auto px-8 py-12 pt-40">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-zinc-100 mb-2">Your Projects</h1>
+                <p class="text-zinc-400">Organize your tasks by project</p>
+            </div>
 
-        <!-- Create Project Button -->
-        <div class="mb-8">
-            <button class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200">
-                <span class="flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
-                    </svg>
-                    New Project
-                </span>
-            </button>
-        </div>
+            <!-- Create Project Button -->
+            <div class="mb-8">
+                <button class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                        </svg>
+                        New Project
+                    </span>
+                </button>
+            </div>
 
-        <!-- Projects Grid -->
-        @if($projects->count() > 0)
+            <!-- Projects Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($projects as $project)
                     <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-200">
@@ -49,7 +49,7 @@
             </div>
         @else
             <!-- Empty State -->
-            <div class="text-center py-12">
+            <div class="text-center py-12 pt-40">
                 <div class="inline-flex items-center justify-center w-16 h-16 bg-zinc-800 rounded-full mb-4">
                     <svg class="w-8 h-8 text-zinc-400" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
