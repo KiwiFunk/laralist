@@ -92,8 +92,8 @@ class TaskController extends Controller
     // Toggle task completion status
     public function toggleStatus(Task $task) {
 
-        // Make sure the user owns the task
-        if ($task->user_id !== Auth::id()) {
+        // Ensure the authenticated user owns this task
+        if ($task->project->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
         
@@ -104,12 +104,13 @@ class TaskController extends Controller
         if (request()->ajax()) {
             return response()->json([
                 'success' => true,
-                'message' => 'Task status toggled successfully!'
+                'task' => $task,
+                'message' => $task->completed ? 'Task completed!' : 'Task reopened!'
             ]);
         }
 
         // Otherwise, redirect to tasks list
-        return redirect('/tasks');
+        return redirect()->route('projects.show', $task->project);
     }
 
     // Delete a task 
