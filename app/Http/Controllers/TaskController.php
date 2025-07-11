@@ -50,7 +50,7 @@ class TaskController extends Controller
             ]);
         }
         // Otherwise, redirect to tasks list
-        return redirect()->route('projects.show', $project);
+        return redirect()->route('projects.tasks', $project);
     }
 
     /**
@@ -86,7 +86,7 @@ class TaskController extends Controller
         }
 
         // Otherwise, redirect to selected project to reflect changes
-        return redirect()->route('projects.show', $task->project);
+        return redirect()->route('projects.tasks', $task->project);
     }
 
     // Toggle task completion status
@@ -110,7 +110,7 @@ class TaskController extends Controller
         }
 
         // Otherwise, redirect to tasks list
-        return redirect()->route('projects.show', $task->project);
+        return redirect()->route('projects.tasks', $task->project);
     }
 
     // Delete a task 
@@ -132,7 +132,7 @@ class TaskController extends Controller
             ]);
         }
         // Otherwise, redirect to tasks list
-        return redirect()->route('projects.show', $projectId); 
+        return redirect()->route('projects.tasks', $projectId); 
     }
 
 }
