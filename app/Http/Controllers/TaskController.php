@@ -53,15 +53,18 @@ class TaskController extends Controller
         return redirect()->route('projects.show', $project);
     }
 
-    // Update an existing task
+    /**
+     * Update an existing task
+     * Route: PUT /tasks/{task}
+     */
     public function update(Request $request, Task $task) {
 
-        // Using route model binding, the $task parameter will automatically be resolved to the Task model instance
-
-        // Ensure the target task belongs to the authenticated user
-        if ($task->user_id !== Auth::id()) {
+        // Ensure the authenticated user owns this task (via project ownership)
+        if ($task->project->user_id !== Auth::id()) {
             abort(403, 'Unauthorized');
         }
+
+        // Using route model binding, the $task parameter will automatically be resolved to the Task model instance
 
         // Validate the request data
         $validated = $request->validate([
@@ -82,8 +85,8 @@ class TaskController extends Controller
             ]);
         }
 
-        // Otherwise, redirect to tasks list to reflect changes
-        return redirect('/tasks'); 
+        // Otherwise, redirect to selected project to reflect changes
+        return redirect()->route('projects.show', $task->project);
     }
 
     // Toggle task completion status
