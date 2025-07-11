@@ -16,10 +16,12 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->boolean('completed')->default(false);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
             // Add indexes for better performance
+            $table->index(['user_id', 'completed']);
             $table->index(['project_id', 'completed']);
             $table->index(['project_id', 'created_at']);
         });
