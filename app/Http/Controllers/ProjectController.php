@@ -79,7 +79,7 @@ class ProjectController extends Controller
             ]);
         }
         // If no AJAX, redirect to the project specific page
-        return redirect()->route('projects.show', $project);
+        return redirect()->route('projects.tasks', $project);
     }
 
     // DELETE a project
