@@ -114,11 +114,15 @@ class TaskController extends Controller
     }
 
     // Delete a task 
-    public function delete($id) {
+    public function delete(Task $task) {
 
         // User scoped to ensure the task belongs to the authenticated user
-        $task = Auth::user()->tasks()->findOrFail($id);  
-        $task->delete(); // Delete the task
+        if ($task->project->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }  
+
+        $projectId = $task->project_id;     // Get the project ID for redirection after deletion
+        $task->delete();                    // Delete the task
 
         // If AJAX, return JSON response
         if (request()->ajax()) {
@@ -128,7 +132,7 @@ class TaskController extends Controller
             ]);
         }
         // Otherwise, redirect to tasks list
-        return redirect('/tasks'); 
+        return redirect()->route('projects.show', $projectId); 
     }
 
 }
