@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+<div x-data="createProjectForm()">
     @if($projects->count() > 0)
         <div class="max-w-6xl mx-auto px-8 py-12 pt-40">
             <!-- Header -->
@@ -47,7 +48,7 @@
                     </div>
                 @endforeach
             </div>
-        @else
+            @else
             <!-- Empty State -->
             <div class="text-center py-12 pt-40">
                 <div class="inline-flex items-center justify-center w-16 h-16 bg-zinc-800 rounded-full mb-4">
@@ -64,9 +65,10 @@
         @endif
 
         <!-- Modal Component -->
-        <div x-data="createProjectForm()">
+        <div>
             <x-create-project-form />
         </div>
 
     </div>
+</div>
 @endsection

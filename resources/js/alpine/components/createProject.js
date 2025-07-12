@@ -2,6 +2,14 @@ export function createProjectForm() {
     return {
         loading: false,
 
+        openModal() {
+            this.isOpen = true;
+        },
+        
+        closeModal() {
+            this.isOpen = false;
+        },
+
         async createProject(event) {
             this.loading = true;
             try {
@@ -46,20 +54,6 @@ export function createProjectForm() {
             setTimeout(() => {
                 window.location.reload();
             }, 500);
-        }
-    };
-}
-
-export function projectModalControls() {
-    return {
-        isOpen: false, // Controls modal visibility
-        
-        openModal() {
-            this.isOpen = true;
-        },
-        
-        closeModal() {
-            this.isOpen = false;
         }
     };
 }

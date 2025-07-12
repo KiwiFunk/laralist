@@ -5,7 +5,7 @@ import Alpine from 'alpinejs'
 import { createTaskStore } from './alpine/store';
 import { taskCard } from './alpine/components/taskCard';
 import { createTaskForm } from './alpine/components/createTask';
-import { createProjectForm, projectModalControls } from './alpine/components/createProject';
+import { createProjectForm } from './alpine/components/createProject';
 
 // Ensure Alpine.js is available globally
 window.Alpine = Alpine  
@@ -17,7 +17,6 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('taskCard', taskCard);
     Alpine.data('createTaskForm', createTaskForm);
     Alpine.data('createProjectForm', createProjectForm);
-    Alpine.data('projectModalControls', projectModalControls);
     
     // Init Alpine store with data from meta tag
     const tasksData = JSON.parse(document.querySelector('meta[name="tasks-data"]')?.content || '[]');
