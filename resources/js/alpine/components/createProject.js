@@ -49,3 +49,17 @@ export function createProjectForm() {
         }
     };
 }
+
+export function projectModalControls() {
+    return {
+        isOpen: false, // Controls modal visibility
+        
+        openModal() {
+            this.isOpen = true;
+        },
+        
+        closeModal() {
+            this.isOpen = false;
+        }
+    };
+}

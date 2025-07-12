@@ -17,7 +17,7 @@
 
             <!-- Create Project Button -->
             <div class="mb-8">
-                <button class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200">
+                <button @click="openModal()" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200">
                     <span class="flex items-center gap-2">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
@@ -57,10 +57,16 @@
                 </div>
                 <h3 class="text-xl font-semibold text-zinc-100 mb-2">No projects yet</h3>
                 <p class="text-zinc-400 mb-6">Create your first project to get started organizing your tasks.</p>
-                <button class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200">
+                <button @click="openModal()" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200">
                     Create Your First Project
                 </button>
             </div>
         @endif
+
+        <!-- Modal Component -->
+        <div x-data="createProjectForm()">
+            <x-create-project-form />
+        </div>
+
     </div>
 @endsection
