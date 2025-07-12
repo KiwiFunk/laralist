@@ -8,7 +8,7 @@ class Project extends Model
 {
     protected $fillable = [
         'user_id',          // Foreign key to the user who owns the project
-        'name',             // Project name (e.g., "Home Renovation")
+        'title',            // Project name (e.g., "Home Renovation")
         'description',      // Optional project details
     ];
 
