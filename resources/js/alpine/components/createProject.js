@@ -20,6 +20,13 @@ export function createProjectForm() {
                 const data = await response.json();
 
                 if (data.success) {
+
+                    // Close the modal
+                    this.isOpen = false;
+                    
+                    // Reset the form
+                    form.reset();
+
                     //add form data to global store
                     //Call refresh function ((FOR NOW))
                     this.addProjectToDOM(data.project);
@@ -35,6 +42,7 @@ export function createProjectForm() {
         },
 
         addProjectToDOM(project) {
+            // For now, reload the page
             setTimeout(() => {
                 window.location.reload();
             }, 500);
