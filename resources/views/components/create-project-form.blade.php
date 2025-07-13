@@ -1,6 +1,14 @@
 
 <!-- Modal Box -->
-<div class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md" x-show="isOpen" @click.away="isOpen = false">
+<div class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-xs" 
+    x-show="isOpen" 
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-100"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    @click.away="isOpen = false">
     <!-- Modal Content -->
     <div class="bg-zinc-800 rounded-lg shadow-lg p-6 w-full max-w-md border border-zinc-700">
 
