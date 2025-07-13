@@ -1,11 +1,11 @@
 
 <!-- Modal Box -->
-<div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" x-show="isOpen" @click.away="isOpen = false">
+<div class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md" x-show="isOpen" @click.away="isOpen = false">
     <!-- Modal Content -->
-    <div class="bg-zinc-800 rounded-lg shadow-lg p-6 w-full max-w-md">
+    <div class="bg-zinc-800 rounded-lg shadow-lg p-6 w-full max-w-md border border-zinc-700">
 
         <!-- Modal Header -->
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center justify-between mb-4 select-none">
             <h2 class="text-xl font-semibold text-zinc-100">Create New Project</h2>
             <button @click="isOpen = false" 
                     class="text-zinc-400 hover:text-zinc-300 p-1">
@@ -18,8 +18,8 @@
         <!-- Modal Form -->
         <form @submit.prevent="createProject($event)" action="/projects" method="POST" class="space-y-4">
             @csrf
-            <div class="flex gap-4 flex-col md:flex-row md:items-center">
-                <div class="flex-1">
+            <div class="flex gap-4 flex-col">
+                <div>
                     <label class="sr-only" for="title">Title:</label>
                     <input type="text" 
                         name="title" 
@@ -29,13 +29,13 @@
                         required>
                 </div>
                 
-                <div class="flex-2">
+                <div>
                     <label class="sr-only" for="description">Description:</label>
                     <textarea 
                         name="description" 
                         id="description" 
-                        placeholder="Add more details (optional)" 
-                        rows="1" 
+                        placeholder="Add a project description (optional)" 
+                        rows="3" 
                         class="w-full pl-4 pr-2 py-3 bg-zinc-700/50 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-400 transition-all duration-200 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
                     ></textarea>
                 </div>
@@ -43,8 +43,7 @@
             </div>
 
             <!-- Form Actions -->
-            <div class="flex justify-end gap-3 pt-4">
-          
+            <div class="flex justify-end gap-3 pt-2">
                 
                 <button type="submit" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200">
                     
