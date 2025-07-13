@@ -30,25 +30,12 @@
 
             <!-- Projects Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($projects as $project)
-                    <div class="bg-zinc-800/50 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 hover:border-orange-500/50 transition-all duration-200">
-                        <div class="mb-4">
-                            <h3 class="text-xl font-semibold text-zinc-100 mb-2">{{ $project->name }}</h3>
-                            @if($project->description)
-                                <p class="text-zinc-400 text-sm">{{ Str::limit($project->description, 100) }}</p>
-                            @endif
-                        </div>
-
-                        <!-- Actions -->
-                        <div class="flex gap-2">
-                            <a href="{{ route('projects.show', $project) }}" class="flex-1 bg-orange-500/10 border border-orange-500/30 text-orange-400 py-2 px-4 rounded-lg text-center text-sm font-medium hover:bg-orange-500/20 transition-colors">
-                                View Project
-                            </a>
-                        </div>
-                    </div>
+                @foreach($projects as $index => $project)
+                    <x-project-card :project="$project" :index="$index" />
                 @endforeach
             </div>
-            @else
+            
+        @else
             <!-- Empty State -->
             <div class="text-center py-12 pt-40">
                 <div class="inline-flex items-center justify-center w-16 h-16 bg-zinc-800 rounded-full mb-4">
