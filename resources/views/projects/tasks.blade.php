@@ -4,7 +4,10 @@
 
 @push('head')
     <!-- Store task data in a meta tag for easy access in JavaScript -->
-    <meta name="tasks-data" content="{{ json_encode($tasks) }}">
+    <meta name="tasks-data" content="{{ json_encode([
+    'project' => $project,
+    'tasks' => $tasks
+    ]) }}">
 @endpush
 
 @section('navbar')

@@ -1,7 +1,8 @@
-export function createTaskStore(initialTasks) {
+export function createTaskStore(initialTasks, project = null) {
     return {
         // Initialize with server data
         tasks: initialTasks,
+        project: project,
         
         // Computed stats (automatically reactive)
         get stats() {
