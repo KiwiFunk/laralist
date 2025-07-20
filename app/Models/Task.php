@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [     // $fillable allows mass assignment for ONLY these fields
+        'user_id',              // Foreign key to the user who created the task
         'project_id',           // Foreign key to the project the task belongs to
         'title',                // Task name (e.g., "Buy groceries")
         'description',          // Optional task details
