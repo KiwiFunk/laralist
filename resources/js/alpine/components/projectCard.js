@@ -2,6 +2,7 @@ export function projectCard(projectId) {
     return {
         loading: false,
         projectId: projectId,
+        isDropdownOpen: false,
 
         // Get data from Alpine store using projectId
         get project() {
@@ -28,9 +29,17 @@ export function projectCard(projectId) {
 
                 if (data.success) {
                     // Remove project from store
-                    this.$store.taskManager.removeProject(this.projectId);
-                    console.log('Project deleted successfully');
+                    this.$store.taskManager.projects = this.$store.taskManager.projects.filter(
+                        p => p.id !== this.projectId
+                    );
+                    
+                    this.$root.classList.add('deleting');
+                    setTimeout(() => {
+                        this.$root.remove();
+                    }, 300);
 
+                    console.log('Project deleted successfully');
+                    
                 } else {
                     alert('Failed to delete project. Please try again.');
                 }

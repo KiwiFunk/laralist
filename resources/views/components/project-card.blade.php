@@ -15,13 +15,13 @@
                 </h2>
 
                 <!-- Dropdown Menu -->
-                <div class="relative z-50" x-data="{ isDropdownOpen: false }">
-                    <button @click="isDropdownOpen = !isDropdownOpen"
+                <div class="relative z-50">
+                    <button @click.prevent.stop="isDropdownOpen = !isDropdownOpen"
                             class="text-zinc-400 hover:text-white cursor-pointer transition-colors focus:outline-none">
                         <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <circle cx="12" cy="5" r="2"/>
-                        <circle cx="12" cy="12" r="2"/>
-                        <circle cx="12" cy="19" r="2"/>
+                            <circle cx="12" cy="5" r="2"/>
+                            <circle cx="12" cy="12" r="2"/>
+                            <circle cx="12" cy="19" r="2"/>
                         </svg>
                     </button>
                     <div x-show="isDropdownOpen"
@@ -29,12 +29,15 @@
                         @click.away="isDropdownOpen = false"
                         x-transition>
                         <ul class="text-sm text-white divide-y divide-zinc-800">
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-zinc-700 transition-colors">Edit</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-500/80 hover:text-white transition-colors">Delete</a>
-                        </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-zinc-700 transition-colors">Edit</a>
+                            </li>
+                            <li>
+                                <a href="#" @click.prevent.stop="deleteProject(); isDropdownOpen = false" 
+                                   class="block px-4 py-2 hover:bg-red-500/80 hover:text-white transition-colors">
+                                    Delete
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
