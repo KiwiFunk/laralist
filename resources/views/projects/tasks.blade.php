@@ -17,6 +17,11 @@
 @section('content')
     <div class="max-w-6xl mx-auto px-8 py-12 pt-40">
 
+        <a href="{{ route('projects.index') }}" class="text-white hover:text-orange-500 mb-6 transition-colors duration-200 inline-block">
+            <!-- Add an SVG icon for back navigation -->
+            <- Back to Projects
+        </a>
+
         <!-- Header Section -->
         @include('partials.header')
 
