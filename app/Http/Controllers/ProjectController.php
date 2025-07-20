@@ -11,7 +11,7 @@ class ProjectController extends Controller
     // Fetch all Projects for user
     public function index()
     {
-        $projects = Auth::user()->projects();
+        $projects = Auth::user()->projects()->get();
         return view('projects.index', ['projects' => $projects]);
     }
 
