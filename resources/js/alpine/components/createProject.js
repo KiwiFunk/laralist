@@ -1,6 +1,7 @@
 export function createProjectForm() {
     return {
         loading: false,
+        isOpen: false,
 
         openModal() {
             this.isOpen = true;
