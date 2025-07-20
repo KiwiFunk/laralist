@@ -29,6 +29,9 @@ export function taskCard(taskId) {
                     // ROLLBACK - Revert optimistic update on failure
                     this.$store.taskManager.toggleTask(this.taskId);
                     alert('Failed to update task status. Please try again.');
+                } else {
+                    // If successful, optimistic update was correct - no action needed
+                    console.log('Task status updated successfully');
                 }
                 // If successful, optimistic update was correct - no action needed
             } catch (error) {
