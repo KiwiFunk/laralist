@@ -8,7 +8,7 @@ export function createTaskForm() {
                 const form = event.target;
                 const formData = new FormData(form);
                  
-                const response = await fetch('/tasks', {
+                const response = await fetch(form.action, {
                     method: 'POST',
                     body: formData,
                     headers: {

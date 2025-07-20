@@ -1,7 +1,15 @@
+@props(['project'])
+
 <div class="bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-6 mb-8 shadow-xl"
      x-data="createTaskForm()">
-    <form @submit.prevent="createTask($event)" action="/tasks" method="POST" class="space-y-4">
+    <form @submit.prevent="createTask($event)" 
+        action="{{ route('tasks.store', $project) }}" 
+        method="POST" 
+        class="space-y-4"
+    >
         @csrf
+        
+
         <div class="flex gap-4 flex-col md:flex-row md:items-center">
             <div class="flex-1">
                 <label class="sr-only" for="title">Title:</label>

@@ -29,7 +29,7 @@
         <x-stats-bar />
 
         <!-- Create Task Bar -->
-        <x-create-task-form />
+        <x-create-task-form :project="$project" />
 
         <!-- Task Cards -->
         @if($tasks->count() > 0)
