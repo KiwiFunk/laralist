@@ -41,8 +41,9 @@ document.addEventListener('alpine:init', () => {
 });
 
 // Debug Alpine startup
-Alpine.start().then(() => {
+try {
+    Alpine.start();
     console.log('Alpine started successfully');
-}).catch(error => {
+} catch (error) {
     console.error('Alpine failed to start:', error);
-});
+}
