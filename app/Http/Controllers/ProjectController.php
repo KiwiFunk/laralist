@@ -30,7 +30,7 @@ class ProjectController extends Controller
             ->get();
 
         // Return a view and pass project/task data using compact
-        return view('projects.display', compact('project', 'tasks'));
+        return view('projects.tasks', compact('project', 'tasks'));
     }
 
     // Store a new Project
