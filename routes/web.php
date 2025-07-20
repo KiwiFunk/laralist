@@ -37,6 +37,6 @@ Route::middleware(['auth', 'throttle:100,1'])->group(function () {
     Route::post('/projects/{project}/tasks', [TaskController::class, 'store'])->name('tasks.store');    // Handle new task submission
     Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');               // Update an existing task
     Route::post('/tasks/{task}/toggle', [TaskController::class, 'toggleStatus'])->name('tasks.toggle'); // Toggle task status
-    Route::delete('/tasks/{id}', [TaskController::class, 'delete']);                                    // Delete a task
+    Route::delete('/tasks/{task}', [TaskController::class, 'delete']);                                    // Delete a task
     
 });

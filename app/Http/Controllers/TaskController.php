@@ -116,6 +116,8 @@ class TaskController extends Controller
     // Delete a task 
     public function delete(Task $task) {
 
+        $task->load('project');
+
         // User scoped to ensure the task belongs to the authenticated user
         if ($task->project->user_id !== Auth::id()) {
             abort(403, 'Unauthorized');
