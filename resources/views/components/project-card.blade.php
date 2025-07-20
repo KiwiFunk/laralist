@@ -15,7 +15,7 @@
             
             <!-- Project Description -->
             <p
-                x-text="task?.description"
+                x-text="project?.description"
                 class="text-zinc-400 mb-4 leading-relaxed"
             ></p>
             
