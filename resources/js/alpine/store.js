@@ -35,4 +35,34 @@ export function createTaskStore(initialTasks) {
             this.tasks.push(newTask);
         }
     };
+};
+
+export function createProjectStore(initialProjects) {
+    return {
+        // Initialize with server JSON data
+        projects: initialProjects,
+        
+        // Actions to modify projects
+        updateProject(projectId, updatedProject) {
+            const index = this.projects.findIndex(p => p.id === projectId);
+            if (index !== -1) {
+                this.projects[index] = { ...this.projects[index], ...updatedProject };
+            }
+        },
+        
+        toggleProject(projectId) {
+            const project = this.projects.find(p => p.id === projectId);
+            if (project) {
+                project.active = !project.active;
+            }
+        },
+        
+        deleteProject(projectId) {
+            this.projects = this.projects.filter(p => p.id !== projectId);
+        },
+        
+        addProject(newProject) {
+            this.projects.push(newProject);
+        }
+    };
 }

@@ -8,20 +8,10 @@
 @endpush
 
 @section('navbar')
-    <!-- x-navbar />
+    <x-navbar />
 @endsection
 
 @section('content')
-
-<!-- DEBUG: Remove this after testing -->
-<div class="" style="background: red; color: white; padding: 10px;">
-    <h3>DEBUG INFO:</h3>
-    <p>Projects variable type: {{ gettype($projects ?? 'undefined') }}</p>
-    <p>Projects count: {{ isset($projects) ? (method_exists($projects, 'count') ? $projects->count() : count($projects)) : 'N/A' }}</p>
-    <p>Projects data: {{ isset($projects) ? json_encode($projects) : 'undefined' }}</p>
-</div>
-<!-- END DEBUG -->
-
 <div x-data="createProjectForm()">
     @if($projects->count() > 0)
         <div class="max-w-6xl mx-auto px-8 py-12 pt-40">

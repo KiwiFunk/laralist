@@ -18,9 +18,14 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('createTaskForm', createTaskForm);
     Alpine.data('createProjectForm', createProjectForm);
     
-    // Init Alpine store with data from meta tag
-    const tasksData = JSON.parse(document.querySelector('meta[name="tasks-data"]')?.content || '[]');
-    Alpine.store('taskManager', createTaskStore(tasksData));
+    // Init Alpine store with data from meta tag if it exists
+    if (document.querySelector('meta[name="tasks-data"]')) {
+        console.log('Tasks data found in meta tag, initializing store...');
+        const tasksData = JSON.parse(document.querySelector('meta[name="tasks-data"]').content);
+        Alpine.store('taskManager', createTaskStore(tasksData));
+    } else {
+        console.warn('No tasks data found in meta tag, aborting.');
+    }
 
     console.log('Alpine components registered');
 });
