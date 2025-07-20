@@ -31,8 +31,7 @@ document.addEventListener('alpine:init', () => {
         console.log('Tasks data found in meta tag, initializing store...');
 
         const tasksData = JSON.parse(document.querySelector('meta[name="tasks-data"]').content);
-        const project = tasksData.project || null; // Fallback if project data is not available
-        Alpine.store('taskManager', createTaskStore(tasksData.tasks));
+        Alpine.store('taskManager', createTaskStore(tasksData.tasks, tasksData.project));
 
     } else {
         console.warn('No tasks data found in meta tag, aborting.');
