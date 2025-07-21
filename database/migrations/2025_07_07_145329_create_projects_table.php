@@ -14,13 +14,10 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');  
+            $table->string('slug')->unique();   // Ensure slug is unique globally
             $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-
-            // Composite unique constraint for user-specific slugs
-            $table->unique(['user_id', 'slug']);    // Ensures slug is unique per user
 
             // Add indexes for better performance
             $table->index(['user_id', 'created_at']);
