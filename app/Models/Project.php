@@ -44,4 +44,24 @@ class Project extends Model
     {
         return $this->tasks()->count();
     }
+
+    // Methods to handle slug generation
+    public function generateSlug()
+    {
+        $baseSlug = Str::slug($this->title);
+        $slug = $baseSlug;
+        $count = 1;                             // Init a counter to handle duplicates
+
+        while ($this->checkUniqueSlug($slug)) {
+            $slug = $baseSlug . '-' . $count;   // Append a number to the slug if it already exists using concatenation
+            $count++;                           // Increment the counter for the next iteration
+        }
+
+        return $slug;                           // Return the unique slug
+    }
+
+    private function checkUniqueSlug($slug)
+    {
+        // Check the value of the generated slug against existing slugs in the database
+    }
 }
