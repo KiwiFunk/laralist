@@ -52,7 +52,8 @@ class ProjectController extends Controller
             return response()->json([
                 'success' => true,
                 'project' => $project,
-                'message' => 'Project created successfully!'
+                'message' => 'Project created successfully!',
+                'redirect_url' => route('projects.show', $project) // Redirect URL for the new project (We already set slug in model route binding)
             ]);
         }
         // Else redirect to index
@@ -78,7 +79,8 @@ class ProjectController extends Controller
             return response()->json([
                 'success' => true,
                 'project' => $project->fresh(), // Make sure newest version is returned
-                'message' => 'Project updated successfully!'
+                'message' => 'Project updated successfully!',
+                'redirect_url' => route('projects.show', $project) // New URL if title was changed (Which will regenerate the slug)
             ]);
         }
         // If no AJAX, redirect to the project specific page
