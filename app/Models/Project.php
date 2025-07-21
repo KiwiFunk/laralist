@@ -89,4 +89,10 @@ class Project extends Model
             }
         });
     }
+
+    // Use the slug for route model binding instead of the default ID
+    public function getRouteKeyName()
+    {
+        return 'slug';  
+    }
 }
