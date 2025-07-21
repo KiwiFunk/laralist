@@ -1,7 +1,8 @@
-export function projectCard(projectId) {
+export function projectCard(projectId, projectSlug) {
     return {
         loading: false,
         projectId: projectId,
+        projectSlug: projectSlug,
         isDropdownOpen: false,
 
         // Get data from Alpine store using projectId
@@ -16,7 +17,7 @@ export function projectCard(projectId) {
             }
 
             try {
-                const response = await fetch(`/projects/${this.projectId}`, {
+                const response = await fetch(`/projects/${this.projectSlug}`, {
                     method: 'DELETE',
                     // Set AJAX and CSRF headers
                     headers: {
