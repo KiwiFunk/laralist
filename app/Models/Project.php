@@ -62,6 +62,9 @@ class Project extends Model
 
     private function checkUniqueSlug($slug)
     {
-        // Check the value of the generated slug against existing slugs in the database
+        return static::where('user_id', $this->user_id)
+                     ->where('slug', $slug)
+                     ->where('id', '!=', $this->id)     // Exclude the current project if updating
+                     ->exists();                        // Check if the slug already exists for the user
     }
 }
