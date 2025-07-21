@@ -9,6 +9,7 @@ class Project extends Model
     protected $fillable = [
         'user_id',          // Foreign key to the user who owns the project
         'title',            // Project name (e.g., "Home Renovation")
+        'slug',             // URL-friendly version of the title (e.g., "home-renovation")
         'description',      // Optional project details
     ];
 
