@@ -95,4 +95,10 @@ class Project extends Model
     {
         return 'slug';  
     }
+
+    //Scope to filter projects by user
+    public function scopeForUser($query, $userId)
+    {
+        return $query->where('user_id', $userId);
+    }
 }
