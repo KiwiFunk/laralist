@@ -1,9 +1,9 @@
 <div 
-    x-data="projectCard({{ $project->id }})"
+    x-data="projectCard({{ $project->id }}, {{ $project->slug }})"
     class="group relative bg-zinc-800/70 backdrop-blur-sm border border-zinc-700 rounded-xl p-5 hover:border-orange-500/50 transition-all duration-500 transform hover:scale-[1.01] hover:shadow-2xl hover:shadow-orange-500/10"
     style="animation: slideInUp 0.6s ease-out {{ $index * 0.1 }}s both;"
 >
-    <a href="{{ route('projects.show', $project) }}" class="absolute inset-0 z-10"></a>
+    <a href="{{ route('projects.show', $project->slug) }}" class="absolute inset-0 z-10"></a>
         
     <div class="flex items-start justify-between">
         <div class="flex-1">
