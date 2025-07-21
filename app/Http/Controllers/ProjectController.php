@@ -11,7 +11,10 @@ class ProjectController extends Controller
     // Fetch all Projects for user
     public function index()
     {
-        $projects = Auth::user()->projects()->get();
+        $projects = Auth::user()->projects()
+            ->orderBy('created_at', 'desc') // Order by creation date, newest first
+            ->get();
+
         return view('projects.index', ['projects' => $projects]);
     }
 
