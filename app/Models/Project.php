@@ -67,4 +67,26 @@ class Project extends Model
                      ->where('id', '!=', $this->id)     // Exclude the current project if updating
                      ->exists();                        // Check if the slug already exists for the user
     }
+
+    /**
+     * Create Boot method to auto-generate slug when creating or updating a project
+     * boot() is part of Laravel's Eloquent model lifecycle
+     * uses ::creating and ::updating to hook into the model's lifecycle
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($project) {
+            if (empty($project->slug)) {
+                $project->slug = $project->generateSlug($project->title);
+            }
+        });
+
+        static::updating(function ($project) {
+            if ($project->isDirty('title')) {           // Check if the title has changed
+                $project->slug = $project->generateSlug($project->title);
+            }
+        });
+    }
 }
